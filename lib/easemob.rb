@@ -3,6 +3,7 @@ require 'json'
 require 'connection_pool'
 require 'easemob/version'
 require 'easemob/token'
+require 'easemob/users'
 
 module Easemob
   class << self
@@ -36,7 +37,8 @@ module Easemob
 
   def self.do_post(resource, body_hash)
     httprbs.with do |http|
-      http.post "#{head_url}/#{resource}", json: body_hash
+      http.headers('Authorization' => "Bearer #{token}")
+          .post "#{head_url}/#{resource}", json: body_hash
     end
   end
 
@@ -45,5 +47,9 @@ module Easemob
     access_token, remain_life_seconds = Token.read_from_store
     Token.refresh if remain_life_seconds < @random_generator.rand(30..3 * 60)
     access_token
+  end
+
+  class << self
+    include Users
   end
 end
