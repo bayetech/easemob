@@ -1,8 +1,9 @@
 module Easemob
   module Token
     def self.refresh
-      data = Easemob.do_post('token', grant_type: 'client_credential', client_id: Easemob.client_id, client_secret: Easemob.client_secret)
-      write_to_store(data)
+      res = Easemob.do_post('token', grant_type: 'client_credentials', client_id: Easemob.client_id, client_secret: Easemob.client_secret)
+      raise "Failed to refresh easemob token: #{res}" unless res.code == 200
+      write_to_store(JSON.parse(res.to_s))
       read_from_store
     end
 
