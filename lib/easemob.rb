@@ -1,5 +1,6 @@
 require 'http'
 require 'json'
+require 'connection_pool'
 require 'easemob/version'
 require 'easemob/token'
 
@@ -13,21 +14,27 @@ module Easemob
     attr_writer :app_name        # 同一“企业”下“APP”唯一标识，在环信开发者管理后台创建应用时填写的“应用名称”
 
     attr_accessor :token_file_path
+    attr_writer :http_pool
+    attr_writer :http_timeout
   end
   @base_url = 'https://a1.easemob.com'
   @token_file_path = '/tmp/easemob_token'
   @random_generator = Random.new
+  @http_pool = 5
+  @http_timeout = 5
 
   def self.head_url
     "#{@base_url}/#{@org_name}/#{@app_name}"
   end
 
-  def self.httprb
-    @httprb ||= HTTP.persistent @base_url
+  def self.httprbs
+    @httprbs ||= ConnectionPool.new(size: @http_pool, timeout: @http_timeout) { HTTP.persistent @base_url }
   end
 
   def self.do_post(resource, body_hash)
-    httprb.post "#{head_url}/#{resource}", json: body_hash
+    httprbs.with do |http|
+      http.post "#{head_url}/#{resource}", json: body_hash
+    end
   end
 
   def self.token
