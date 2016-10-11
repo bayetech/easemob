@@ -22,7 +22,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Config
+
+Create `config/initializers/easemob.rb` and put following configurations into it.
+
+```ruby
+Easemob.client_id     = 'app_client_id'     # 使用 APP 的 client_id
+Easemob.client_secret = 'app_client_secret'
+Easemob.org_name = 'bayetech' # 企业的唯一标识，开发者管理后台注册账号时填写的企业 ID
+Easemob.app_name = 'landlord' # 同一“企业”下“APP”唯一标识，创建应用时填写的“应用名称”
+```
 
 ## Development
 
