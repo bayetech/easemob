@@ -13,18 +13,21 @@ module Easemob
     attr_writer :org_name        # 企业的唯一标识，开发者管理后台注册账号时填写的企业 ID
     attr_writer :app_name        # 同一“企业”下“APP”唯一标识，在环信开发者管理后台创建应用时填写的“应用名称”
 
-    attr_accessor :token_file_path
+    attr_writer :token_file_path
     attr_writer :http_pool
     attr_writer :http_timeout
   end
   @base_url = 'https://a1.easemob.com'
-  @token_file_path = '/tmp/easemob_token'
   @random_generator = Random.new
   @http_pool = 5
   @http_timeout = 5
 
   def self.head_url
     "#{@base_url}/#{@org_name}/#{@app_name}"
+  end
+
+  def self.token_file_path
+    @token_file_path || "/tmp/easemob_#{@org_name}_#{@app_name}_token"
   end
 
   def self.httprbs
