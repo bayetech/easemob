@@ -1,3 +1,5 @@
+require 'http'
+require 'json'
 require 'easemob/version'
 require 'easemob/token'
 
@@ -18,6 +20,14 @@ module Easemob
 
   def self.head_url
     "#{@base_url}/#{@org_name}/#{@app_name}"
+  end
+
+  def self.httprb
+    @httprb ||= HTTP.persistent @base_url
+  end
+
+  def self.do_post(resource, body_hash)
+    httprb.post "#{head_url}/#{resource}", json: body_hash
   end
 
   def self.token

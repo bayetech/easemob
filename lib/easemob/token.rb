@@ -1,9 +1,7 @@
-require 'json'
-
 module Easemob
   module Token
     def self.refresh
-      data = do_post('token', JSON.generate(grant_type: 'client_credential', client_id: client_id, client_secret: client_secret))
+      data = Easemob.do_post('token', grant_type: 'client_credential', client_id: Easemob.client_id, client_secret: Easemob.client_secret)
       write_to_store(data)
       read_from_store
     end
@@ -26,11 +24,11 @@ module Easemob
     end
 
     def self.read_token
-      JSON.parse(File.read(token_file_path))
+      JSON.parse(File.read(Easemob.token_file_path))
     end
 
     def self.write_token(token_hash)
-      File.write(token_file_path, token_hash.to_json)
+      File.write(Easemob.token_file_path, token_hash.to_json)
     end
   end
 end
