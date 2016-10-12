@@ -7,6 +7,7 @@ require 'easemob/users'
 
 module Easemob
   class UserNameError < RuntimeError; end
+  class QuotaLimitError < RuntimeError; end
 
   class << self
     attr_accessor :client_id     # 使用 APP 的 client_id
@@ -37,6 +38,9 @@ module Easemob
       # 408:（请求超时）服务器等候请求时发生超时。
       when 408
         res = do_request(verb, http, resource, body_hash)
+      # 503:（服务不可用）请求接口超过调用频率限制，即接口被限流。
+      when 429, 503
+        raise QuotaLimitError, 'Return http status code is 429/503, hit quota limit of Easemob service,'
       end
       res
     end
