@@ -1,7 +1,14 @@
 module Easemob
   module Users
     def create_user(username, password, nickname = nil)
+      valid_username!(username)
       request(:post, 'users', username: username, password: password, nickname: nickname)
+    end
+
+    private
+
+    def valid_username!(username)
+      raise UserNameError, "#{username} is invalid for easemob" unless username[/[a-zA-Z0-9_-]*/] == username
     end
   end
 end

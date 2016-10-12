@@ -6,6 +6,8 @@ require 'easemob/token'
 require 'easemob/users'
 
 module Easemob
+  class UserNameError < RuntimeError; end
+
   class << self
     attr_accessor :client_id     # 使用 APP 的 client_id
     attr_accessor :client_secret # 和 client_secret 获取授权管理员 token
