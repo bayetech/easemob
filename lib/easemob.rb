@@ -23,18 +23,6 @@ module Easemob
   @http_pool = 5
   @http_timeout = 5
 
-  def self.head_url
-    "#{@base_url}/#{@org_name}/#{@app_name}"
-  end
-
-  def self.token_file_path
-    @token_file_path || "/tmp/easemob_#{@org_name}_#{@app_name}_token"
-  end
-
-  def self.httprbs
-    @httprbs ||= ConnectionPool.new(size: @http_pool, timeout: @http_timeout) { HTTP.persistent @base_url }
-  end
-
   def self.do_post(resource, body_hash)
     httprbs.with do |http|
       res = do_post_request(http, resource, body_hash)
@@ -51,11 +39,6 @@ module Easemob
     end
   end
 
-  def self.do_post_request(http, resource, body_hash)
-    http.headers('Authorization' => "Bearer #{token}")
-        .post "#{head_url}/#{resource}", json: body_hash
-  end
-
   def self.token
     # Possible two worker running, one worker refresh token, other unaware, so must read every time
     access_token, remain_life_seconds = Token.read_from_store
@@ -65,5 +48,24 @@ module Easemob
 
   class << self
     include Users
+  end
+
+  private_class_method
+
+  def self.do_post_request(http, resource, body_hash)
+    http.headers('Authorization' => "Bearer #{token}")
+        .post "#{head_url}/#{resource}", json: body_hash
+  end
+
+  def self.httprbs
+    @httprbs ||= ConnectionPool.new(size: @http_pool, timeout: @http_timeout) { HTTP.persistent @base_url }
+  end
+
+  def self.head_url
+    "#{@base_url}/#{@org_name}/#{@app_name}"
+  end
+
+  def self.token_file_path
+    @token_file_path || "/tmp/easemob_#{@org_name}_#{@app_name}_token"
   end
 end
