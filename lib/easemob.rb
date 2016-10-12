@@ -24,6 +24,7 @@ module Easemob
   @random_generator = Random.new
   @http_pool = 5
   @http_timeout = 5
+  @token_file_path = nil
 
   def self.request(verb, resource, body_hash)
     httprbs.with do |http|
