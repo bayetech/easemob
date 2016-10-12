@@ -1,4 +1,5 @@
-# Easemob
+Easemob [![Gem Version][version-badge]][rubygems] [![Build Status][travis-badge]][travis] [![Code Climate][codeclimate-badge]][codeclimate] [![Code Coverage][codecoverage-badge]][codecoverage]
+=======
 
 Easemob is an unofficial easemob IM instant message gem, inspired from [huanxin](https://github.com/RobotJiang/ruby-for-huanxin) a lot.
 
@@ -46,3 +47,13 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/bayete
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
+
+
+[version-badge]: https://badge.fury.io/rb/easemob.svg
+[rubygems]: https://rubygems.org/gems/easemob
+[travis-badge]: https://travis-ci.org/bayetech/easemob.svg
+[travis]: https://travis-ci.org/bayetech/easemob
+[codeclimate-badge]: https://codeclimate.com/github/bayetech/easemob/badges/gpa.svg
+[codeclimate]: https://codeclimate.com/github/bayetech/easemob
+[codecoverage-badge]: https://codeclimate.com/github/bayetech/easemob/badges/coverage.svg
+[codecoverage]: https://codeclimate.com/github/bayetech/easemob/coverage
