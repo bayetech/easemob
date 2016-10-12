@@ -10,6 +10,10 @@ module Easemob
       request(:post, 'users', users)
     end
 
+    def get_user(username)
+      request(:get, "users/#{username}")
+    end
+
     private
 
     def valid_username!(username)

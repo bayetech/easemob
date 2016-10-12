@@ -26,6 +26,13 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#get_user' do
+    it 'can query user info' do
+      res = Easemob.get_user('Eric-Guo')
+      expect(res.code).to eq 200
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)

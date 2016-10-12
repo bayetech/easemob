@@ -27,7 +27,7 @@ module Easemob
   @http_timeout = 5
   @token_file_path = nil
 
-  def self.request(verb, resource, body_hash)
+  def self.request(verb, resource, body_hash = nil)
     httprbs.with do |http|
       res = do_request(verb, http, resource, body_hash)
       case res.code
