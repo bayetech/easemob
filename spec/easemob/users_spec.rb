@@ -1,17 +1,29 @@
 require 'spec_helper'
 
 RSpec.describe Easemob::Users do
-  it 'can create_user' do
-    res = Easemob.create_user('Eric-Guo', 'pwd', 'Eric')
-    expect(res.code).to eq 200
+  describe '#create_user' do
+    it 'can create user with nickname' do
+      res = Easemob.create_user('Eric-Guo', 'pwd', 'Eric')
+      expect(res.code).to eq 200
+    end
   end
 
-  it 'can create_users' do
-    users = [{ username: 'u1', password: 'pwd' },
-             { username: 'u2', password: 'pwd' },
-             { username: 'u3', password: 'pwd' }]
-    res = Easemob.create_users(users)
-    expect(res.code).to eq 200
+  describe '#create_users' do
+    it 'can create users in batch' do
+      users = [{ username: 'u1', password: 'pwd' },
+               { username: 'u2', password: 'pwd' },
+               { username: 'u3', password: 'pwd' }]
+      res = Easemob.create_users(users)
+      expect(res.code).to eq 200
+    end
+
+    it 'can create users with nickname' do
+      users = [{ username: 'un1', password: 'pwd', nickname: 'n1' },
+               { username: 'un2', password: 'pwd', nickname: 'n2' },
+               { username: 'un3', password: 'pwd', nickname: 'n3' }]
+      res = Easemob.create_users(users)
+      expect(res.code).to eq 200
+    end
   end
 
   context 'raise error' do
