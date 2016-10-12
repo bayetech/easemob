@@ -23,17 +23,17 @@ module Easemob
   @http_pool = 5
   @http_timeout = 5
 
-  def self.do_post(resource, body_hash)
+  def self.request(verb, resource, body_hash)
     httprbs.with do |http|
-      res = do_post_request(http, resource, body_hash)
+      res = do_request(verb, http, resource, body_hash)
       case res.code
       # 401:（未授权）请求要求身份验证。对于需要 token 的接口，服务器可能返回此响应。
       when 401, 408
         Token.refresh
-        res = do_post_request(http, resource, body_hash)
+        res = do_request(verb, http, resource, body_hash)
       # 408:（请求超时）服务器等候请求时发生超时。
       when 408
-        res = do_post_request(http, resource, body_hash)
+        res = do_request(verb, http, resource, body_hash)
       end
       res
     end
@@ -52,9 +52,9 @@ module Easemob
 
   private_class_method
 
-  def self.do_post_request(http, resource, body_hash)
+  def self.do_request(verb, http, resource, body_hash)
     http.headers('Authorization' => "Bearer #{token}")
-        .post "#{head_url}/#{resource}", json: body_hash
+        .request(verb, "#{head_url}/#{resource}", json: body_hash)
   end
 
   def self.httprbs
