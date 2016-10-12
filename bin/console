@@ -2,6 +2,7 @@
 
 require 'bundler/setup'
 require 'easemob'
+load 'spec/test_account.rb'
 
 require 'byebug'
 
