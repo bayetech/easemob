@@ -5,6 +5,11 @@ module Easemob
       request(:post, 'users', username: username, password: password, nickname: nickname)
     end
 
+    def create_users(users)
+      users.map { |user| valid_username!(user['username'] || user[:username]) }
+      request(:post, 'users', users)
+    end
+
     private
 
     def valid_username!(username)
