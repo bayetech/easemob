@@ -28,7 +28,7 @@ module Easemob
       res = do_request(verb, http, resource, body_hash)
       case res.code
       # 401:（未授权）请求要求身份验证。对于需要 token 的接口，服务器可能返回此响应。
-      when 401, 408
+      when 401
         Token.refresh
         res = do_request(verb, http, resource, body_hash)
       # 408:（请求超时）服务器等候请求时发生超时。
