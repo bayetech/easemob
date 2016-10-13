@@ -127,6 +127,16 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#query_user_blocks' do
+    it "query user's blocks" do
+      res = Easemob.query_user_blocks('u')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to be >= 2
+      expect(h1['data']).to include('u9')
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)

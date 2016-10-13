@@ -56,6 +56,10 @@ module Easemob
       request :delete, "users/#{owner_username}/blocks/users/#{blocked_username}"
     end
 
+    def query_user_blocks(owner_username)
+      request :get, "users/#{owner_username}/blocks/users"
+    end
+
     private
 
     def valid_username!(username)
