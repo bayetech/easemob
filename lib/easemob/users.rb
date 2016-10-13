@@ -14,6 +14,12 @@ module Easemob
       request(:get, "users/#{username}")
     end
 
+    def query_users(limit, cursor = nil)
+      params = { limit: limit }
+      params[:cursor] = cursor unless cursor.nil?
+      request(:get, 'user', params: params)
+    end
+
     def delete_users!(number = 100)
       request(:delete, 'users', params: { limit: number })
     end

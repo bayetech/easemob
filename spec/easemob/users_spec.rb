@@ -33,6 +33,15 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#query_users' do
+    it 'can query users in batch' do
+      res = Easemob.query_users(3)
+      expect(res.code).to eq 200
+      h = JSON.parse res.to_s
+      expect(h['entities'][2]['username']).to eq 'u2'
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)
