@@ -40,6 +40,10 @@ module Easemob
       request :post, "users/#{owner_username}/contacts/users/#{friend_username}"
     end
 
+    def remove_user_friend(owner_username, friend_username)
+      request :delete, "users/#{owner_username}/contacts/users/#{friend_username}"
+    end
+
     private
 
     def valid_username!(username)
