@@ -27,17 +27,22 @@ module Easemob
   @http_timeout = 5
   @token_file_path = nil
 
-  def self.request(verb, resource, body_hash = nil)
+  # Make an HTTP request with the given verb to easemob server
+  # @param verb [Symbol]
+  # @param resource [String]
+  # @option options [Hash]
+  # @return [HTTP::Response]
+  def self.request(verb, resource, options = nil)
     httprbs.with do |http|
-      res = do_request(verb, http, resource, body_hash)
+      res = do_request(verb, http, resource, options)
       case res.code
       # 401:（未授权）请求要求身份验证。对于需要 token 的接口，服务器可能返回此响应。
       when 401
         Token.refresh
-        res = do_request(verb, http, resource, body_hash)
+        res = do_request(verb, http, resource, options)
       # 408:（请求超时）服务器等候请求时发生超时。
       when 408
-        res = do_request(verb, http, resource, body_hash)
+        res = do_request(verb, http, resource, options)
       # 503:（服务不可用）请求接口超过调用频率限制，即接口被限流。
       when 429, 503
         raise QuotaLimitError, 'Return http status code is 429/503, hit quota limit of Easemob service,'
@@ -46,6 +51,8 @@ module Easemob
     end
   end
 
+  # Get admin access token from easemob server
+  # @return access_token [String]
   def self.token
     # Possible two worker running, one worker refresh token, other unaware, so must read every time
     access_token, remain_life_seconds = Token.read_from_store
@@ -59,9 +66,9 @@ module Easemob
 
   private_class_method
 
-  def self.do_request(verb, http, resource, body_hash)
+  def self.do_request(verb, http, resource, options)
     http.headers('Authorization' => "Bearer #{token}")
-        .request(verb, "#{head_url}/#{resource}", json: body_hash)
+        .request(verb, "#{head_url}/#{resource}", options)
   end
 
   def self.httprbs

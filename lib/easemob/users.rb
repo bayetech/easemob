@@ -2,12 +2,12 @@ module Easemob
   module Users
     def create_user(username, password, nickname = nil)
       valid_username!(username)
-      request(:post, 'users', username: username, password: password, nickname: nickname)
+      request(:post, 'users', json: { username: username, password: password, nickname: nickname })
     end
 
     def create_users(users)
       users.map { |user| valid_username!(user['username'] || user[:username]) }
-      request(:post, 'users', users)
+      request(:post, 'users', json: users)
     end
 
     def get_user(username)
