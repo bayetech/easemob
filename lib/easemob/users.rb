@@ -44,6 +44,10 @@ module Easemob
       request :delete, "users/#{owner_username}/contacts/users/#{friend_username}"
     end
 
+    def query_user_friends(owner_username)
+      request :get, "users/#{owner_username}/contacts/users"
+    end
+
     private
 
     def valid_username!(username)
