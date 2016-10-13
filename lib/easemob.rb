@@ -45,7 +45,9 @@ module Easemob
         res = do_request(verb, http, resource, options)
       # 503:（服务不可用）请求接口超过调用频率限制，即接口被限流。
       when 429, 503
-        raise QuotaLimitError, 'Return http status code is 429/503, hit quota limit of Easemob service,'
+        sleep 1
+        res = do_request(verb, http, resource, options)
+        raise QuotaLimitError, 'Return http status code is 429/503, hit quota limit of Easemob service,' if [429, 503].include?(res.code)
       end
       res
     end
