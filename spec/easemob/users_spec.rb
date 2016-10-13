@@ -61,6 +61,15 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#reset_user_password' do
+    it 'can reset the user password' do
+      res = Easemob.reset_user_password('u', 'new_pwd')
+      expect(res.code).to eq 200
+      h = JSON.parse res.to_s
+      expect(h['action']).to eq 'set user password'
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)
