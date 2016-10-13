@@ -36,6 +36,10 @@ module Easemob
       request :put, "users/#{username}", json: { nickname: nickname }
     end
 
+    def add_user_friend(owner_username, friend_username)
+      request :post, "users/#{owner_username}/contacts/users/#{friend_username}"
+    end
+
     private
 
     def valid_username!(username)

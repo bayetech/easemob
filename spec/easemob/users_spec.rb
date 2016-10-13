@@ -80,6 +80,15 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#add_user_friend' do
+    it 'add u as friend of u1' do
+      res = Easemob.add_user_friend('u1', 'u')
+      expect(res.code).to eq 200
+      h = JSON.parse res.to_s
+      expect(h['entities'][0]['username']).to eq 'u'
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)
