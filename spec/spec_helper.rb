@@ -44,5 +44,7 @@ RSpec.configure do |config|
     expect(res.code).to eq 200
     res = Easemob.add_user_friend('u', 'u3')
     expect(res.code).to eq 200
+    res = Easemob.add_user_blocks 'u', %w(u7 u8 u9)
+    expect(res.code).to eq 200
   end
 end

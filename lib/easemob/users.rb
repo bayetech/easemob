@@ -52,6 +52,10 @@ module Easemob
       request :post, "users/#{owner_username}/blocks/users", json: { usernames: usernames }
     end
 
+    def remove_user_block(owner_username, blocked_username)
+      request :delete, "users/#{owner_username}/blocks/users/#{blocked_username}"
+    end
+
     private
 
     def valid_username!(username)
