@@ -36,5 +36,6 @@ RSpec.configure do |config|
     users = (1..9).inject([]) { |a, e| a << { username: "u#{e}", password: 'pwd' } }
     res = Easemob.create_users(users)
     expect(res.code).to eq 200
+    sleep 2 # must sleep to make sure easemob finish insert.
   end
 end
