@@ -32,6 +32,10 @@ module Easemob
       request :put, "users/#{username}/password", json: { newpassword: newpassword }
     end
 
+    def set_user_nickname(username, nickname)
+      request :put, "users/#{username}", json: { nickname: nickname }
+    end
+
     private
 
     def valid_username!(username)

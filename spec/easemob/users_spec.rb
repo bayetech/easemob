@@ -70,6 +70,16 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#set_user_nickname' do
+    it "set the user's nickname" do
+      res = Easemob.set_user_nickname('u', 'ONE')
+      expect(res.code).to eq 200
+      h = JSON.parse res.to_s
+      expect(h['entities'][0]['username']).to eq 'u'
+      expect(h['entities'][0]['nickname']).to eq 'ONE'
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)
