@@ -28,7 +28,7 @@ RSpec.describe Easemob::Users do
 
   describe '#get_user' do
     it 'can query user info' do
-      res = Easemob.get_user('Eric-Guo')
+      res = Easemob.get_user('u')
       expect(res.code).to eq 200
     end
   end

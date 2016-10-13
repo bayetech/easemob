@@ -27,4 +27,11 @@ RSpec.configure do |config|
   # the `--only-failures` and `--next-failure` CLI options. We recommend
   # you configure your source control system to ignore this file.
   config.example_status_persistence_file_path = 'spec/examples.txt'
+
+  config.before(:suite) do
+    res = Easemob.delete_users!
+    expect(res.code).to eq 200
+    res = Easemob.create_user('u', 'pwd')
+    expect(res.code).to eq 200
+  end
 end
