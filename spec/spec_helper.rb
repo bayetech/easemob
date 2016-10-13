@@ -33,5 +33,8 @@ RSpec.configure do |config|
     expect(res.code).to eq 200
     res = Easemob.create_user('u', 'pwd')
     expect(res.code).to eq 200
+    users = (1..9).inject([]) { |a, e| a << { username: "u#{e}", password: 'pwd' } }
+    res = Easemob.create_users(users)
+    expect(res.code).to eq 200
   end
 end

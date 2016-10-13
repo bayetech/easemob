@@ -10,9 +10,9 @@ RSpec.describe Easemob::Users do
 
   describe '#create_users' do
     it 'can create users in batch' do
-      users = [{ username: 'u1', password: 'pwd' },
-               { username: 'u2', password: 'pwd' },
-               { username: 'u3', password: 'pwd' }]
+      users = [{ username: 'ub1', password: 'pwd' },
+               { username: 'ub2', password: 'pwd' },
+               { username: 'ub3', password: 'pwd' }]
       res = Easemob.create_users(users)
       expect(res.code).to eq 200
     end
