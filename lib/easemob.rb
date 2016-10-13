@@ -32,7 +32,7 @@ module Easemob
   # @param resource [String]
   # @option options [Hash]
   # @return [HTTP::Response]
-  def self.request(verb, resource, options = nil)
+  def self.request(verb, resource, options = {})
     httprbs.with do |http|
       res = do_request(verb, http, resource, options)
       case res.code
