@@ -54,6 +54,13 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#delete_user' do
+    it 'can delete user' do
+      res = Easemob.delete_user('u9')
+      expect(res.code).to eq 200
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)

@@ -20,8 +20,12 @@ module Easemob
       request(:get, 'user', params: params)
     end
 
+    def delete_user(username)
+      request :delete, "users/#{username}"
+    end
+
     def delete_users!(number = 100)
-      request(:delete, 'users', params: { limit: number })
+      request :delete, 'users', params: { limit: number }
     end
 
     private
