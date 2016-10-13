@@ -48,6 +48,10 @@ module Easemob
       request :get, "users/#{owner_username}/contacts/users"
     end
 
+    def add_user_blocks(owner_username, usernames)
+      request :post, "users/#{owner_username}/blocks/users", json: { usernames: usernames }
+    end
+
     private
 
     def valid_username!(username)

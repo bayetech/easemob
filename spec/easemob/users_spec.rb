@@ -108,6 +108,16 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#add_user_blocks' do
+    it 'blocks a list of usernames for a user' do
+      res = Easemob.add_user_blocks 'u1', %w(u2 u3)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to be >= 2
+      expect(h1['data']).to include('u3')
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)
