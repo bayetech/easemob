@@ -37,8 +37,8 @@ RSpec.describe Easemob::Users do
     it 'can query users in batch' do
       res = Easemob.query_users(3)
       expect(res.code).to eq 200
-      h = JSON.parse res.to_s
-      expect(h['entities'][2]['username']).to eq 'u2'
+      h1 = JSON.parse res.to_s
+      expect(h1['entities'][2]['username']).to eq 'u2'
     end
 
     it 'can query users in batch per page via cursor' do
@@ -58,6 +58,8 @@ RSpec.describe Easemob::Users do
     it 'can delete user' do
       res = Easemob.delete_user('u9')
       expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['entities'][0]['username']).to eq 'u9'
     end
   end
 
@@ -65,8 +67,8 @@ RSpec.describe Easemob::Users do
     it 'can reset the user password' do
       res = Easemob.reset_user_password('u', 'new_pwd')
       expect(res.code).to eq 200
-      h = JSON.parse res.to_s
-      expect(h['action']).to eq 'set user password'
+      h1 = JSON.parse res.to_s
+      expect(h1['action']).to eq 'set user password'
     end
   end
 
@@ -74,9 +76,9 @@ RSpec.describe Easemob::Users do
     it "set the user's nickname" do
       res = Easemob.set_user_nickname('u', 'ONE')
       expect(res.code).to eq 200
-      h = JSON.parse res.to_s
-      expect(h['entities'][0]['username']).to eq 'u'
-      expect(h['entities'][0]['nickname']).to eq 'ONE'
+      h1 = JSON.parse res.to_s
+      expect(h1['entities'][0]['username']).to eq 'u'
+      expect(h1['entities'][0]['nickname']).to eq 'ONE'
     end
   end
 
@@ -84,8 +86,8 @@ RSpec.describe Easemob::Users do
     it 'add u as friend of u1' do
       res = Easemob.add_user_friend('u1', 'u')
       expect(res.code).to eq 200
-      h = JSON.parse res.to_s
-      expect(h['entities'][0]['username']).to eq 'u'
+      h1 = JSON.parse res.to_s
+      expect(h1['entities'][0]['username']).to eq 'u'
     end
   end
 
@@ -93,8 +95,8 @@ RSpec.describe Easemob::Users do
     it 'remove u1 as friend of u' do
       res = Easemob.remove_user_friend('u', 'u1')
       expect(res.code).to eq 200
-      h = JSON.parse res.to_s
-      expect(h['entities'][0]['username']).to eq 'u1'
+      h1 = JSON.parse res.to_s
+      expect(h1['entities'][0]['username']).to eq 'u1'
     end
   end
 
@@ -119,7 +121,7 @@ RSpec.describe Easemob::Users do
   end
 
   describe '#remove_user_block' do
-    it 'blocks a list of usernames for a user' do
+    it 'stop block a username for a user' do
       res = Easemob.remove_user_block 'u', 'u7'
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
@@ -132,8 +134,8 @@ RSpec.describe Easemob::Users do
       res = Easemob.query_user_blocks('u')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
-      expect(h1['data'].count).to be >= 2
-      expect(h1['data']).to include('u9')
+      expect(h1['data'].count).to be >= 1
+      expect(h1['data']).to include('u8')
     end
   end
 
