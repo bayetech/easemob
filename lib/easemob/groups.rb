@@ -1,7 +1,9 @@
 module Easemob
   module Groups
-    def get_groups
-      request :get, 'chatgroups'
+    def query_groups(limit = 50, cursor = nil)
+      params = { limit: limit }
+      params[:cursor] = cursor unless cursor.nil?
+      request :get, 'chatgroups', params: params
     end
 
     def create_group(groupname, description, owner, members: nil, is_public: true, maxusers: 200, is_approval: false)

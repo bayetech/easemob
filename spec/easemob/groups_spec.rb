@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe Easemob::Groups do
-  describe '#get_groups' do
+  describe '#query_groups' do
     it 'get all groups' do
-      res = Easemob.get_groups
+      res = Easemob.query_groups
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data'].count).to be >= 1

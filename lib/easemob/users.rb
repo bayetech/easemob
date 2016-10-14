@@ -14,7 +14,7 @@ module Easemob
       request :get, "users/#{username}"
     end
 
-    def query_users(limit, cursor = nil)
+    def query_users(limit = 50, cursor = nil)
       params = { limit: limit }
       params[:cursor] = cursor unless cursor.nil?
       request :get, 'user', params: params
