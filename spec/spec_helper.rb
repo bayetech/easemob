@@ -52,5 +52,9 @@ RSpec.configure do |config|
     expect(res.code).to eq 200
     res = Easemob.deactivate_user 'deactivated_user'
     expect(res.code).to eq 200
+    res = Easemob.create_group 'g', 'group', 'u', members: %w(u1 u2 u3)
+    expect(res.code).to eq 200
+    res = Easemob.create_group 'to_delete_group', 'group', 'u'
+    expect(res.code).to eq 200
   end
 end
