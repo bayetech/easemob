@@ -11,5 +11,9 @@ module Easemob
       jd[:maxusers] = maxusers unless maxusers.nil?
       request :put, "chatgroups/#{group_id}", json: jd
     end
+
+    def delete_group(group_id)
+      request :delete, "chatgroups/#{group_id}"
+    end
   end
 end

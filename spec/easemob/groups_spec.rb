@@ -27,4 +27,14 @@ RSpec.describe Easemob::Groups do
       expect(h1['data']['maxusers']).to be nil
     end
   end
+
+  describe '#delete_group' do
+    it 'can delete group' do
+      res = Easemob.delete_group($easemob_rspec_to_delete_group_id)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['success']).to be true
+      expect(h1['data']['groupid']).to eq $easemob_rspec_to_delete_group_id
+    end
+  end
 end
