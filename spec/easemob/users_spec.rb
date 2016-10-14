@@ -181,6 +181,16 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#disconnect_user' do
+    it 'Force to disconnect a user' do
+      res = Easemob.disconnect_user('u9')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['action']).to eq 'Disconnect user'
+      expect(h1['data']['result']).not_to be nil
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)

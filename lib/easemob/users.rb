@@ -80,6 +80,10 @@ module Easemob
       request :post, "users/#{username}/activate"
     end
 
+    def disconnect_user(username)
+      request :get, "users/#{username}/disconnect"
+    end
+
     private
 
     def valid_username!(username)
