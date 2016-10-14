@@ -72,6 +72,10 @@ module Easemob
       request :get, "users/#{username}/offline_msg_status/#{msg_id}"
     end
 
+    def deactivate_user(username)
+      request :post, "users/#{username}/deactivate"
+    end
+
     private
 
     def valid_username!(username)

@@ -162,6 +162,16 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#deactivate_user' do
+    it 'Deactivate a user' do
+      res = Easemob.deactivate_user('u9')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['entities'][0]['username']).to eq 'u9'
+      expect(h1['entities'][0]['activated']).to be false
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)
