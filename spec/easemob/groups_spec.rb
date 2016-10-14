@@ -26,6 +26,15 @@ RSpec.describe Easemob::Groups do
       expect(h1['data']['description']).to be true
       expect(h1['data']['maxusers']).to be nil
     end
+
+    it 'can set maxusers to 500' do
+      res = Easemob.modify_group($easemob_rspec_group_g_id, maxusers: 500)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['groupname']).to be nil
+      expect(h1['data']['description']).to be nil
+      expect(h1['data']['maxusers']).to be true
+    end
   end
 
   describe '#delete_group' do
