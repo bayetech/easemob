@@ -60,6 +60,10 @@ module Easemob
       request :get, "users/#{owner_username}/blocks/users"
     end
 
+    def get_user_status(username)
+      request :get, "users/#{username}/status"
+    end
+
     private
 
     def valid_username!(username)

@@ -139,6 +139,15 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#get_user_status' do
+    it 'get user online status' do
+      res = Easemob.get_user_status('u')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['u']).to_not be_nil
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)
