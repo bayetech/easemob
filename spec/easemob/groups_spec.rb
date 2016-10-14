@@ -18,8 +18,8 @@ RSpec.describe Easemob::Groups do
   end
 
   describe '#modify_group' do
-    it 'can modify group with new name and description' do
-      res = Easemob.modify_group($easemob_rspec_group_g_id, 'g', 'group 1 after modified')
+    it 'can modify group with new groupname and description' do
+      res = Easemob.modify_group($easemob_rspec_group_g_id, groupname: 'g', description: 'group 1 after modified')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data']['groupname']).to be true
