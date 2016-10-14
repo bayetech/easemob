@@ -1,5 +1,9 @@
 module Easemob
   module Groups
+    def get_groups
+      request :get, 'chatgroups'
+    end
+
     def create_group(groupname, description, owner, members: nil, is_public: true, maxusers: 200, is_approval: false)
       jd = { groupname: groupname, desc: description, public: is_public, owner: owner, users: maxusers, approval: is_approval }
       jd[:members] = members unless members.nil?
