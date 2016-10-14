@@ -76,6 +76,10 @@ module Easemob
       request :post, "users/#{username}/deactivate"
     end
 
+    def activate_user(username)
+      request :post, "users/#{username}/activate"
+    end
+
     private
 
     def valid_username!(username)

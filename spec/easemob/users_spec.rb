@@ -164,11 +164,20 @@ RSpec.describe Easemob::Users do
 
   describe '#deactivate_user' do
     it 'Deactivate a user' do
-      res = Easemob.deactivate_user('u8')
+      res = Easemob.deactivate_user('activated_user')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
-      expect(h1['entities'][0]['username']).to eq 'u8'
+      expect(h1['entities'][0]['username']).to eq 'activated_user'
       expect(h1['entities'][0]['activated']).to be false
+    end
+  end
+
+  describe '#activate_user' do
+    it 'Activate a user' do
+      res = Easemob.activate_user('deactivated_user')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['action']).to eq 'activate user'
     end
   end
 
