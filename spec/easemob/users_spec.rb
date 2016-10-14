@@ -148,6 +148,15 @@ RSpec.describe Easemob::Users do
     end
   end
 
+  describe '#get_user_offline_msg_count' do
+    it 'get user total number of offline message' do
+      res = Easemob.get_user_offline_msg_count('u')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['u']).to_not be_nil
+    end
+  end
+
   context 'raise error' do
     specify 'raise UserNameError if given wrong username' do
       expect { Easemob.create_user('$$', '12345') }.to raise_error(Easemob::UserNameError)
