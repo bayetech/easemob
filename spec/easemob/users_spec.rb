@@ -56,10 +56,10 @@ RSpec.describe Easemob::Users do
 
   describe '#delete_user' do
     it 'can delete user' do
-      res = Easemob.delete_user('u9')
+      res = Easemob.delete_user('to_delete_user')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
-      expect(h1['entities'][0]['username']).to eq 'u9'
+      expect(h1['entities'][0]['username']).to eq 'to_delete_user'
     end
   end
 
