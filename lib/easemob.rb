@@ -4,6 +4,7 @@ require 'connection_pool'
 require 'easemob/version'
 require 'easemob/token'
 require 'easemob/users'
+require 'easemob/groups'
 
 module Easemob
   class UserNameError < RuntimeError; end
@@ -64,6 +65,7 @@ module Easemob
 
   class << self
     include Users
+    include Groups
   end
 
   private_class_method
