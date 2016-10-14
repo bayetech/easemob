@@ -16,4 +16,15 @@ RSpec.describe Easemob::Groups do
       expect(h1['data']['groupid']).not_to be nil
     end
   end
+
+  describe '#modify_group' do
+    it 'can modify group with new name and description' do
+      res = Easemob.modify_group($easemob_rspec_group_g_id, 'g', 'group 1 after modified')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['groupname']).to be true
+      expect(h1['data']['description']).to be true
+      expect(h1['data']['maxusers']).to be nil
+    end
+  end
 end

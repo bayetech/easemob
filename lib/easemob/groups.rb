@@ -5,5 +5,11 @@ module Easemob
       jd[:members] = members unless members.nil?
       request :post, 'chatgroups', json: jd
     end
+
+    def modify_group(group_id, name, desc, maxusers = nil)
+      jd = { groupname: name, description: desc }
+      jd[:maxusers] = maxusers unless maxusers.nil?
+      request :put, "chatgroups/#{group_id}", json: jd
+    end
   end
 end
