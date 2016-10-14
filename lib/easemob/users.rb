@@ -68,6 +68,10 @@ module Easemob
       request :get, "users/#{owner_username}/offline_msg_count"
     end
 
+    def get_user_offline_msg_status(username, msg_id)
+      request :get, "users/#{username}/offline_msg_status/#{msg_id}"
+    end
+
     private
 
     def valid_username!(username)
