@@ -53,6 +53,24 @@ RSpec.describe Easemob::Groups do
     end
   end
 
+  describe '#query_group_blocks' do
+    it 'Query group blocks' do
+      res = Easemob.query_group_blocks($easemob_rspec_group_g_id)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']).not_to be nil
+    end
+  end
+
+  describe '#user_joined_chatgroups' do
+    it 'Get a user joined chatgroups list' do
+      res = Easemob.user_joined_chatgroups('u')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to be >= 2
+    end
+  end
+
   describe '#delete_group' do
     it 'can delete group' do
       res = Easemob.delete_group($easemob_rspec_to_delete_group_id)
@@ -127,15 +145,6 @@ RSpec.describe Easemob::Groups do
     end
   end
 
-  describe '#user_joined_chatgroups' do
-    it 'Get a user joined chatgroups list' do
-      res = Easemob.user_joined_chatgroups('u')
-      expect(res.code).to eq 200
-      h1 = JSON.parse res.to_s
-      expect(h1['data'].count).to be >= 2
-    end
-  end
-
   describe '#group_set_owner' do
     it 'Set a new owner for a group' do
       res = Easemob.group_set_owner($easemob_rspec_newowner_group_id, newowner: 'u1')
@@ -183,15 +192,6 @@ RSpec.describe Easemob::Groups do
       expect(h1['data']['action']).to eq 'remove_blocks'
       expect(h1['data']['groupid']).to eq $easemob_rspec_to_unblock_group_id
       expect(h1['data']['user']).to eq 'u3'
-    end
-  end
-
-  describe '#query_group_blocks' do
-    it 'Query group blocks' do
-      res = Easemob.query_group_blocks($easemob_rspec_group_g_id)
-      expect(res.code).to eq 200
-      h1 = JSON.parse res.to_s
-      expect(h1['data']).not_to be nil
     end
   end
 end

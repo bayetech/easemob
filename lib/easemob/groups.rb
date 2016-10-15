@@ -20,6 +20,14 @@ module Easemob
       request :get, "chatgroups/#{group_id}/users"
     end
 
+    def query_group_blocks(group_id)
+      request :get, "chatgroups/#{group_id}/blocks/users"
+    end
+
+    def user_joined_chatgroups(username)
+      request :get, "users/#{username}/joined_chatgroups"
+    end
+
     def delete_group(group_id)
       request :delete, "chatgroups/#{group_id}"
     end
@@ -48,10 +56,6 @@ module Easemob
       request :delete, "chatgroups/#{group_id}/users/#{[*usernames].join(',')}"
     end
 
-    def user_joined_chatgroups(username)
-      request :get, "users/#{username}/joined_chatgroups"
-    end
-
     def group_set_owner(group_id, newowner:)
       request :put, "chatgroups/#{group_id}", json: { newowner: newowner }
     end
@@ -62,10 +66,6 @@ module Easemob
 
     def remove_from_group_block(group_id, blocked_usernames:)
       request :delete, "chatgroups/#{group_id}/blocks/users/#{[*blocked_usernames].join(',')}"
-    end
-
-    def query_group_blocks(group_id)
-      request :get, "chatgroups/#{group_id}/blocks/users"
     end
   end
 end
