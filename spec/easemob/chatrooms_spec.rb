@@ -78,7 +78,7 @@ RSpec.describe Easemob::Chatrooms do
   end
 
   describe '#user_join_chatroom' do
-    it 'A group can add one user' do
+    it 'A chatroom can add one user' do
       res = Easemob.user_join_chatroom($easemob_rspec_chatroom_c_id, username: 'u6')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
@@ -86,6 +86,18 @@ RSpec.describe Easemob::Chatrooms do
       expect(h1['data']['result']).to be true
       expect(h1['data']['id']).to eq $easemob_rspec_chatroom_c_id
       expect(h1['data']['user']).to eq 'u6'
+    end
+  end
+
+  describe '#user_leave_chatroom' do
+    it 'A chatroom can remove one user' do
+      res = Easemob.user_leave_chatroom($easemob_rspec_chatroom_c_id, username: 'u3')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['action']).to eq 'remove_member'
+      expect(h1['data']['result']).to be true
+      expect(h1['data']['id']).to eq $easemob_rspec_chatroom_c_id
+      expect(h1['data']['user']).to eq 'u3'
     end
   end
 end
