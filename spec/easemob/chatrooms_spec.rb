@@ -100,4 +100,15 @@ RSpec.describe Easemob::Chatrooms do
       expect(h1['data']['user']).to eq 'u3'
     end
   end
+
+  describe '#chatroom_add_users' do
+    it 'Can add multi users to a chatroom' do
+      res = Easemob.chatroom_add_users($easemob_rspec_chatroom_c_id, usernames: %w(u7 u8))
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['action']).to eq 'add_member'
+      expect(h1['data']['id']).to eq $easemob_rspec_chatroom_c_id
+      expect(h1['data']['newmembers']).to match_array %w(u7 u8)
+    end
+  end
 end

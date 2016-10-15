@@ -37,5 +37,9 @@ module Easemob
     def user_leave_chatroom(chatroom_id, username:)
       request :delete, "chatrooms/#{chatroom_id}/users/#{username}"
     end
+
+    def chatroom_add_users(chatroom_id, usernames:)
+      request :post, "chatrooms/#{chatroom_id}/users", json: { usernames: [*usernames] }
+    end
   end
 end
