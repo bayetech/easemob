@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Easemob::Users do
   describe '#create_user' do
     it 'can create user with nickname' do
-      res = Easemob.create_user('Eric-Guo', 'pwd', 'Eric')
+      res = Easemob.create_user('Eric-Guo', 'pwd', nickname: 'Eric')
       expect(res.code).to eq 200
     end
   end

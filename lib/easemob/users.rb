@@ -1,8 +1,10 @@
 module Easemob
   module Users
-    def create_user(username, password, nickname = nil)
+    def create_user(username, password, nickname: nil)
       valid_username!(username)
-      request :post, 'users', json: { username: username, password: password, nickname: nickname }
+      jd = { username: username, password: password }
+      jd[:nickname] = nickname unless nickname.nil?
+      request :post, 'users', json: jd
     end
 
     def create_users(users)
