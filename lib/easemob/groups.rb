@@ -11,7 +11,7 @@ module Easemob
     end
 
     def get_groups(group_ids)
-      request :get, "chatgroups/#{group_ids.join(',')}"
+      request :get, "chatgroups/#{[*group_ids].join(',')}"
     end
 
     def query_groups(limit = 50, cursor: nil)
@@ -45,11 +45,11 @@ module Easemob
     end
 
     def group_add_users(group_id, usernames:)
-      request :post, "chatgroups/#{group_id}/users", json: { usernames: usernames }
+      request :post, "chatgroups/#{group_id}/users", json: { usernames: [*usernames] }
     end
 
     def group_remove_users(group_id, usernames:)
-      request :delete, "chatgroups/#{group_id}/users/#{usernames.join(',')}"
+      request :delete, "chatgroups/#{group_id}/users/#{[*usernames].join(',')}"
     end
 
     def user_joined_chatgroups(username)
