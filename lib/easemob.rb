@@ -5,6 +5,7 @@ require 'easemob/version'
 require 'easemob/token'
 require 'easemob/users'
 require 'easemob/groups'
+require 'easemob/chatrooms'
 
 module Easemob
   class UserNameError < RuntimeError; end
@@ -66,6 +67,7 @@ module Easemob
   class << self
     include Users
     include Groups
+    include Chatrooms
   end
 
   private_class_method
