@@ -84,7 +84,7 @@ RSpec.describe Easemob::Users do
 
   describe '#add_user_friend' do
     it 'add u as friend of u1' do
-      res = Easemob.add_user_friend('u1', 'u')
+      res = Easemob.add_user_friend 'u1', friend_username: 'u'
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['entities'][0]['username']).to eq 'u'
@@ -93,7 +93,7 @@ RSpec.describe Easemob::Users do
 
   describe '#remove_user_friend' do
     it 'remove u1 as friend of u' do
-      res = Easemob.remove_user_friend('u', 'u1')
+      res = Easemob.remove_user_friend 'u', friend_username: 'u1'
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['entities'][0]['username']).to eq 'u1'

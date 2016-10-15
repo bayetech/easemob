@@ -38,11 +38,11 @@ module Easemob
       request :put, "users/#{username}", json: { nickname: nickname }
     end
 
-    def add_user_friend(owner_username, friend_username)
+    def add_user_friend(owner_username, friend_username:)
       request :post, "users/#{owner_username}/contacts/users/#{friend_username}"
     end
 
-    def remove_user_friend(owner_username, friend_username)
+    def remove_user_friend(owner_username, friend_username:)
       request :delete, "users/#{owner_username}/contacts/users/#{friend_username}"
     end
 
