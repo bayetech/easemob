@@ -56,6 +56,10 @@ module Easemob
       request :put, "chatgroups/#{group_id}", json: { newowner: newowner }
     end
 
+    def add_to_group_block(group_id, to_block_usernames:)
+      request :post, "chatgroups/#{group_id}/blocks/users", json: { usernames: [*to_block_usernames] }
+    end
+
     def query_group_blocks(group_id)
       request :get, "chatgroups/#{group_id}/blocks/users"
     end

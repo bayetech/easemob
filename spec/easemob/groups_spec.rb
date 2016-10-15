@@ -145,6 +145,27 @@ RSpec.describe Easemob::Groups do
     end
   end
 
+  describe '#add_to_group_block' do
+    it 'blocks a list of usernames in a group' do
+      res = Easemob.add_to_group_block $easemob_rspec_group_g_id, to_block_usernames: %w(u4 u5)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to eq 2
+      expect(h1['data'].collect { |d| d['user'] }).to match_array %w(u4 u5)
+    end
+
+    it 'block a username in a group' do
+      res = Easemob.add_to_group_block $easemob_rspec_group_g_id, to_block_usernames: 'u3'
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to eq 1
+      expect(h1['data'][0]['result']).to be true
+      expect(h1['data'][0]['action']).to eq 'add_blocks'
+      expect(h1['data'][0]['groupid']).to eq $easemob_rspec_group_g_id
+      expect(h1['data'][0]['user']).to eq 'u3'
+    end
+  end
+
   describe '#query_group_blocks' do
     it 'Query group blocks' do
       res = Easemob.query_group_blocks($easemob_rspec_group_g_id)
