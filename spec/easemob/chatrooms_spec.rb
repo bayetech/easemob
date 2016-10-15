@@ -76,4 +76,16 @@ RSpec.describe Easemob::Chatrooms do
       expect(h1['data']['maxusers']).to be true
     end
   end
+
+  describe '#user_join_chatroom' do
+    it 'A group can add one user' do
+      res = Easemob.user_join_chatroom($easemob_rspec_chatroom_c_id, username: 'u6')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['action']).to eq 'add_member'
+      expect(h1['data']['result']).to be true
+      expect(h1['data']['id']).to eq $easemob_rspec_chatroom_c_id
+      expect(h1['data']['user']).to eq 'u6'
+    end
+  end
 end

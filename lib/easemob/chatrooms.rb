@@ -29,5 +29,9 @@ module Easemob
       jd[:maxusers] = maxusers unless maxusers.nil?
       request :put, "chatrooms/#{chatroom_id}", json: jd
     end
+
+    def user_join_chatroom(chatroom_id, username:)
+      request :post, "chatrooms/#{chatroom_id}/users/#{username}"
+    end
   end
 end
