@@ -60,6 +60,10 @@ module Easemob
       request :post, "chatgroups/#{group_id}/blocks/users", json: { usernames: [*to_block_usernames] }
     end
 
+    def remove_from_group_block(group_id, blocked_usernames:)
+      request :delete, "chatgroups/#{group_id}/blocks/users/#{[*blocked_usernames].join(',')}"
+    end
+
     def query_group_blocks(group_id)
       request :get, "chatgroups/#{group_id}/blocks/users"
     end

@@ -72,5 +72,12 @@ RSpec.configure do |config|
     h4 = JSON.parse res.to_s
     expect(h4['data']['groupid']).not_to be nil
     $easemob_rspec_newowner_group_id = h4['data']['groupid']
+    res = Easemob.create_group 'to_unblock_group', 'need to unblock group', 'u', members: %w(u1 u2 u3 u4 u5)
+    expect(res.code).to eq 200
+    h5 = JSON.parse res.to_s
+    expect(h5['data']['groupid']).not_to be nil
+    $easemob_rspec_to_unblock_group_id = h5['data']['groupid']
+    res = Easemob.add_to_group_block $easemob_rspec_to_unblock_group_id, to_block_usernames: %w(u3 u4 u5)
+    expect(res.code).to eq 200
   end
 end

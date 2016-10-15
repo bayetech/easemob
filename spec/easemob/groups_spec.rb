@@ -166,6 +166,26 @@ RSpec.describe Easemob::Groups do
     end
   end
 
+  describe '#remove_from_group_block' do
+    it 'stop blocking a list of username in a group' do
+      res = Easemob.remove_from_group_block $easemob_rspec_to_unblock_group_id, blocked_usernames: %w(u4 u5)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to eq 2
+      expect(h1['data'].collect { |d| d['user'] }).to match_array %w(u4 u5)
+    end
+
+    it 'stop blocking a username in a group' do
+      res = Easemob.remove_from_group_block $easemob_rspec_to_unblock_group_id, blocked_usernames: 'u3'
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['result']).to be true
+      expect(h1['data']['action']).to eq 'remove_blocks'
+      expect(h1['data']['groupid']).to eq $easemob_rspec_to_unblock_group_id
+      expect(h1['data']['user']).to eq 'u3'
+    end
+  end
+
   describe '#query_group_blocks' do
     it 'Query group blocks' do
       res = Easemob.query_group_blocks($easemob_rspec_group_g_id)
