@@ -6,6 +6,10 @@ module Easemob
       request :post, 'chatgroups', json: jd
     end
 
+    def get_group(group_id)
+      request :get, "chatgroups/#{group_id}"
+    end
+
     def query_groups(limit = 50, cursor = nil)
       params = { limit: limit }
       params[:cursor] = cursor unless cursor.nil?
