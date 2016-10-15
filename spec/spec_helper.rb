@@ -52,7 +52,7 @@ RSpec.configure do |config|
     expect(res.code).to eq 200
     res = Easemob.deactivate_user 'deactivated_user'
     expect(res.code).to eq 200
-    res = Easemob.create_group 'g', 'group', 'u', members: %w(u1 u2 u3)
+    res = Easemob.create_group 'g', 'group', 'u', members: %w(u1 u2 u3 u4 u5)
     expect(res.code).to eq 200
     h1 = JSON.parse res.to_s
     expect(h1['data']['groupid']).not_to be nil

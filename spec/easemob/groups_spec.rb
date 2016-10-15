@@ -85,13 +85,13 @@ RSpec.describe Easemob::Groups do
 
   describe '#user_join_group' do
     it 'A group can add one user' do
-      res = Easemob.user_join_group($easemob_rspec_group_g_id, username: 'u4')
+      res = Easemob.user_join_group($easemob_rspec_group_g_id, username: 'u6')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data']['action']).to eq 'add_member'
       expect(h1['data']['result']).to be true
       expect(h1['data']['groupid']).to eq $easemob_rspec_group_g_id
-      expect(h1['data']['user']).to eq 'u4'
+      expect(h1['data']['user']).to eq 'u6'
     end
   end
 
@@ -109,12 +109,12 @@ RSpec.describe Easemob::Groups do
 
   describe '#group_add_users' do
     it 'Can add multi users to a group' do
-      res = Easemob.group_add_users($easemob_rspec_group_g_id, usernames: %w(u5 u6))
+      res = Easemob.group_add_users($easemob_rspec_group_g_id, usernames: %w(u7 u8))
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data']['action']).to eq 'add_member'
       expect(h1['data']['groupid']).to eq $easemob_rspec_group_g_id
-      expect(h1['data']['newmembers']).to match_array %w(u5 u6)
+      expect(h1['data']['newmembers']).to match_array %w(u7 u8)
     end
   end
 
