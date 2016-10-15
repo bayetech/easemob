@@ -52,7 +52,6 @@ RSpec.describe Easemob::Groups do
       res = Easemob.query_group_users($easemob_rspec_group_g_id)
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
-      byebug
       expect(h1['data'].count).to be >= 2
     end
   end

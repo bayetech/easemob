@@ -41,7 +41,7 @@ RSpec.configure do |config|
                                 { username: 'activated_user', password: 'pwd' },
                                 { username: 'deactivated_user', password: 'pwd' }])
     expect(res.code).to eq 200
-    sleep 1 # must sleep to make sure easemob finish insert.
+    sleep 2 # must sleep to make sure easemob finish insert.
     res = Easemob.add_user_friend('u', 'u1')
     expect(res.code).to eq 200
     res = Easemob.add_user_friend('u', 'u2')
