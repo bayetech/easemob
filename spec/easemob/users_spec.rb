@@ -65,7 +65,7 @@ RSpec.describe Easemob::Users do
 
   describe '#reset_user_password' do
     it 'can reset the user password' do
-      res = Easemob.reset_user_password('u', 'new_pwd')
+      res = Easemob.reset_user_password 'u', newpassword: 'new_pwd'
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['action']).to eq 'set user password'
@@ -74,7 +74,7 @@ RSpec.describe Easemob::Users do
 
   describe '#set_user_nickname' do
     it "set the user's nickname" do
-      res = Easemob.set_user_nickname('u', 'ONE')
+      res = Easemob.set_user_nickname 'u', nickname: 'ONE'
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['entities'][0]['username']).to eq 'u'

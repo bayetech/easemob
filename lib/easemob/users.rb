@@ -28,11 +28,11 @@ module Easemob
       request :delete, 'users', params: { limit: number }
     end
 
-    def reset_user_password(username, newpassword)
+    def reset_user_password(username, newpassword:)
       request :put, "users/#{username}/password", json: { newpassword: newpassword }
     end
 
-    def set_user_nickname(username, nickname)
+    def set_user_nickname(username, nickname:)
       request :put, "users/#{username}", json: { nickname: nickname }
     end
 
