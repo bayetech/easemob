@@ -110,9 +110,9 @@ RSpec.describe Easemob::Users do
     end
   end
 
-  describe '#add_user_blocks' do
+  describe '#add_to_user_blocks' do
     it 'blocks a list of usernames for a user' do
-      res = Easemob.add_user_blocks 'u1', %w(u2 u3)
+      res = Easemob.add_to_user_blocks 'u1', to_block_usernames: %w(u2 u3)
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data'].count).to be >= 2
@@ -120,9 +120,9 @@ RSpec.describe Easemob::Users do
     end
   end
 
-  describe '#remove_user_block' do
+  describe '#remove_from_user_block' do
     it 'stop block a username for a user' do
-      res = Easemob.remove_user_block 'u', 'u7'
+      res = Easemob.remove_from_user_block 'u', blocked_username: 'u7'
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['entities'][0]['username']).to eq 'u7'

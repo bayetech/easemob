@@ -48,11 +48,11 @@ module Easemob
       request :get, "users/#{owner_username}/contacts/users"
     end
 
-    def add_user_blocks(owner_username, usernames)
-      request :post, "users/#{owner_username}/blocks/users", json: { usernames: usernames }
+    def add_to_user_blocks(owner_username, to_block_usernames:)
+      request :post, "users/#{owner_username}/blocks/users", json: { usernames: to_block_usernames }
     end
 
-    def remove_user_block(owner_username, blocked_username)
+    def remove_from_user_block(owner_username, blocked_username:)
       request :delete, "users/#{owner_username}/blocks/users/#{blocked_username}"
     end
 
