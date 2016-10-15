@@ -43,7 +43,7 @@ RSpec.describe Easemob::Chatrooms do
       res = Easemob.user_joined_chatrooms('u')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
-      expect(h1['data'].count).to be >= 2
+      expect(h1['data'].count).to be >= 1
     end
   end
 
