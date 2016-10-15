@@ -29,7 +29,7 @@ RSpec.describe Easemob::Groups do
   end
 
   describe '#get_groups' do
-    it 'get groups info by given Array of group_id'
+    it 'get groups info by given Array of group_id' do
       res = Easemob.get_groups([$easemob_rspec_group_g_id, $easemob_rspec_empty_group_id])
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
@@ -44,6 +44,16 @@ RSpec.describe Easemob::Groups do
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data'].count).to be >= 1
+    end
+  end
+
+  describe '#query_group_users' do
+    it 'get all users in a groups' do
+      res = Easemob.query_group_users($easemob_rspec_group_g_id)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      byebug
+      expect(h1['data'].count).to be >= 2
     end
   end
 

@@ -20,6 +20,10 @@ module Easemob
       request :get, 'chatgroups', params: params
     end
 
+    def query_group_users(group_id)
+      request :get, "chatgroups/#{group_id}/users"
+    end
+
     def delete_group(group_id)
       request :delete, "chatgroups/#{group_id}"
     end
