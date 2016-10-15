@@ -6,6 +6,10 @@ module Easemob
       request :post, 'chatrooms', json: jd
     end
 
+    def get_chatroom(chatroom_id)
+      request :get, "chatrooms/#{chatroom_id}"
+    end
+
     def query_chatrooms
       request :get, 'chatrooms'
     end

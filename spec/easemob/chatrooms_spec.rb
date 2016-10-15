@@ -17,6 +17,18 @@ RSpec.describe Easemob::Chatrooms do
     end
   end
 
+  describe '#get_chatroom' do
+    it 'get chatroom info by given chatroom_id' do
+      res = Easemob.get_chatroom($easemob_rspec_chatroom_c_id)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'][0]['id']).to eq $easemob_rspec_chatroom_c_id
+      expect(h1['data'][0]['public']).to be true
+      expect(h1['data'][0]['allowinvites']).to be false
+      expect(h1['data'][0]['affiliations_count']).to be >= 2
+    end
+  end
+
   describe '#query_chatrooms' do
     it 'get all chatrooms' do
       res = Easemob.query_chatrooms
