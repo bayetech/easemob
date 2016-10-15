@@ -6,6 +6,10 @@ module Easemob
       request :post, 'chatrooms', json: jd
     end
 
+    def delete_chatroom(chatroom_id)
+      request :delete, "chatrooms/#{chatroom_id}"
+    end
+
     def modify_chatroom(chatroom_id, chatroom_name: nil, description: nil, maxusers: nil)
       jd = {}
       jd[:name] = chatroom_name unless chatroom_name.nil?

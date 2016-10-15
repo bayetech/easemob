@@ -89,5 +89,10 @@ RSpec.configure do |config|
     expect(h7['data']['id']).not_to be nil
     $easemob_rspec_chatroom_c_id = h7['data']['id']
 
+    res = Easemob.create_chatroom 'to_delete_chatroom', 'to delete chatroom', 'u'
+    expect(res.code).to eq 200
+    h9 = JSON.parse res.to_s
+    expect(h9['data']['id']).not_to be nil
+    $easemob_rspec_to_delete_chatroom_id = h9['data']['id']
   end
 end
