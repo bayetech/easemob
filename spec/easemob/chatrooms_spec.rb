@@ -49,11 +49,11 @@ RSpec.describe Easemob::Chatrooms do
 
   describe '#delete_chatroom' do
     it 'can delete chatroom' do
-      res = Easemob.delete_group $easemob_rspec_to_delete_chatroom_id
+      res = Easemob.delete_chatroom $easemob_rspec_to_delete_chatroom_id
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data']['success']).to be true
-      expect(h1['data']['id']).to be nil
+      expect(h1['data']['id']).to eq $easemob_rspec_to_delete_chatroom_id
     end
   end
 
