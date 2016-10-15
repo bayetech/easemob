@@ -19,7 +19,7 @@ module Easemob
     def query_users(limit = 50, cursor: nil)
       params = { limit: limit }
       params[:cursor] = cursor unless cursor.nil?
-      request :get, 'user', params: params
+      request :get, 'users', params: params
     end
 
     def delete_user(username)
