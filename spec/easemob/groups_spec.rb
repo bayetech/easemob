@@ -87,7 +87,7 @@ RSpec.describe Easemob::Groups do
 
   describe '#user_join_group' do
     it 'A group can add one user' do
-      res = Easemob.user_join_group('u4', $easemob_rspec_group_g_id)
+      res = Easemob.user_join_group($easemob_rspec_group_g_id, username: 'u4')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data']['action']).to eq 'add_member'
@@ -99,7 +99,7 @@ RSpec.describe Easemob::Groups do
 
   describe '#user_leave_group' do
     it 'A group can remove one user' do
-      res = Easemob.user_leave_group('u3', $easemob_rspec_group_g_id)
+      res = Easemob.user_leave_group($easemob_rspec_group_g_id, username: 'u3')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data']['action']).to eq 'remove_member'
