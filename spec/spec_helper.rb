@@ -48,7 +48,7 @@ RSpec.configure do |config|
     expect(res.code).to eq 200
     res = Easemob.add_user_friend('u', friend_username: 'u3')
     expect(res.code).to eq 200
-    res = Easemob.add_to_user_blocks 'u', to_block_usernames: %w(u7 u8 u9)
+    res = Easemob.add_to_user_block 'u', to_block_usernames: %w(u7 u8 u9)
     expect(res.code).to eq 200
     res = Easemob.deactivate_user 'deactivated_user'
     expect(res.code).to eq 200
