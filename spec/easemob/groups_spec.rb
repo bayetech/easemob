@@ -140,7 +140,7 @@ RSpec.describe Easemob::Groups do
 
   describe '#group_set_owner' do
     it 'Set a new owner for a group' do
-      res = Easemob.group_set_owner($easemob_rspec_empty_group_id, newowner: 'u1')
+      res = Easemob.group_set_owner($easemob_rspec_newowner_group_id, newowner: 'u1')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data']['newowner']).to be true

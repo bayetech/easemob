@@ -57,15 +57,20 @@ RSpec.configure do |config|
     h1 = JSON.parse res.to_s
     expect(h1['data']['groupid']).not_to be nil
     $easemob_rspec_group_g_id = h1['data']['groupid']
-    res = Easemob.create_group 'empty_group', 'group', 'u'
-    expect(res.code).to eq 200
-    h1 = JSON.parse res.to_s
-    expect(h1['data']['groupid']).not_to be nil
-    $easemob_rspec_empty_group_id = h1['data']['groupid']
-    res = Easemob.create_group 'to_delete_group', 'group', 'u'
+    res = Easemob.create_group 'empty_group', 'empty group', 'u'
     expect(res.code).to eq 200
     h2 = JSON.parse res.to_s
     expect(h2['data']['groupid']).not_to be nil
-    $easemob_rspec_to_delete_group_id = h2['data']['groupid']
+    $easemob_rspec_empty_group_id = h2['data']['groupid']
+    res = Easemob.create_group 'to_delete_group', 'to delete group', 'u'
+    expect(res.code).to eq 200
+    h3 = JSON.parse res.to_s
+    expect(h3['data']['groupid']).not_to be nil
+    $easemob_rspec_to_delete_group_id = h3['data']['groupid']
+    res = Easemob.create_group 'newowner_group', 'new owner group', 'u', members: %w(u1)
+    expect(res.code).to eq 200
+    h4 = JSON.parse res.to_s
+    expect(h4['data']['groupid']).not_to be nil
+    $easemob_rspec_newowner_group_id = h4['data']['groupid']
   end
 end
