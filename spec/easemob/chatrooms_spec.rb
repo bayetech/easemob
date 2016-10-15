@@ -111,4 +111,13 @@ RSpec.describe Easemob::Chatrooms do
       expect(h1['data']['newmembers']).to match_array %w(u7 u8)
     end
   end
+
+  describe '#chatroom_remove_users' do
+    it 'Can remove multi users from a chatroom' do
+      res = Easemob.chatroom_remove_users($easemob_rspec_chatroom_c_id, usernames: %w(u1 u2))
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to eq 2
+    end
+  end
 end
