@@ -57,6 +57,11 @@ RSpec.configure do |config|
     h1 = JSON.parse res.to_s
     expect(h1['data']['groupid']).not_to be nil
     $easemob_rspec_group_g_id = h1['data']['groupid']
+    res = Easemob.create_group 'empty_group', 'group', 'u'
+    expect(res.code).to eq 200
+    h1 = JSON.parse res.to_s
+    expect(h1['data']['groupid']).not_to be nil
+    $easemob_rspec_empty_group_id = h1['data']['groupid']
     res = Easemob.create_group 'to_delete_group', 'group', 'u'
     expect(res.code).to eq 200
     h2 = JSON.parse res.to_s

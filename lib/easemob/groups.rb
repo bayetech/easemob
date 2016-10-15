@@ -10,6 +10,10 @@ module Easemob
       request :get, "chatgroups/#{group_id}"
     end
 
+    def get_groups(group_ids)
+      request :get, "chatgroups/#{group_ids.join(',')}"
+    end
+
     def query_groups(limit = 50, cursor = nil)
       params = { limit: limit }
       params[:cursor] = cursor unless cursor.nil?

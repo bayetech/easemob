@@ -18,13 +18,23 @@ RSpec.describe Easemob::Groups do
   end
 
   describe '#get_group' do
-    it 'get group info' do
+    it 'get group info by given group_id' do
       res = Easemob.get_group($easemob_rspec_group_g_id)
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data'][0]['id']).to eq $easemob_rspec_group_g_id
       expect(h1['data'][0]['public']).to be true
       expect(h1['data'][0]['allowinvites']).to be false
+    end
+  end
+
+  describe '#get_groups' do
+    it 'get groups info by given Array of group_id'
+      res = Easemob.get_groups([$easemob_rspec_group_g_id, $easemob_rspec_empty_group_id])
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'][0]['id']).to eq $easemob_rspec_group_g_id
+      expect(h1['data'][1]['id']).to eq $easemob_rspec_empty_group_id
     end
   end
 
