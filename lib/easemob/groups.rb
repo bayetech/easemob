@@ -51,5 +51,9 @@ module Easemob
     def group_remove_users(group_id, usernames:)
       request :delete, "chatgroups/#{group_id}/users/#{usernames.join(',')}"
     end
+
+    def user_joined_chatgroups(username)
+      request :get, "users/#{username}/joined_chatgroups"
+    end
   end
 end

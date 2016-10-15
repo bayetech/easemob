@@ -128,4 +128,13 @@ RSpec.describe Easemob::Groups do
       expect(h1['data'].count).to eq 2
     end
   end
+
+  describe '#user_joined_chatgroups' do
+    it 'Get a user joined chatgroups list' do
+      res = Easemob.user_joined_chatgroups('u')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to be >= 2
+    end
+  end
 end
