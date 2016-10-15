@@ -59,5 +59,9 @@ module Easemob
     def group_set_owner(group_id, newowner:)
       request :put, "chatgroups/#{group_id}", json: { newowner: newowner }
     end
+
+    def query_group_blocks(group_id)
+      request :get, "chatgroups/#{group_id}/blocks/users"
+    end
   end
 end

@@ -146,4 +146,13 @@ RSpec.describe Easemob::Groups do
       expect(h1['data']['newowner']).to be true
     end
   end
+
+  describe '#query_group_blocks' do
+    it 'Query group blocks' do
+      res = Easemob.query_group_blocks($easemob_rspec_group_g_id)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']).not_to be nil
+    end
+  end
 end
