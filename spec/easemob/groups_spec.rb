@@ -33,8 +33,7 @@ RSpec.describe Easemob::Groups do
       res = Easemob.get_groups([$easemob_rspec_group_g_id, $easemob_rspec_empty_group_id])
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
-      expect(h1['data'][0]['id']).to eq $easemob_rspec_group_g_id
-      expect(h1['data'][1]['id']).to eq $easemob_rspec_empty_group_id
+      expect(h1['data'].collect { |d| d['id'] }).to match_array([$easemob_rspec_group_g_id, $easemob_rspec_empty_group_id])
     end
   end
 
