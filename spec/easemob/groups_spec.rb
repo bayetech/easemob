@@ -110,13 +110,22 @@ RSpec.describe Easemob::Groups do
   end
 
   describe '#group_add_users' do
-    it 'A group can add multi users' do
+    it 'Can add multi users to a group' do
       res = Easemob.group_add_users($easemob_rspec_group_g_id, usernames: %w(u5 u6))
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data']['action']).to eq 'add_member'
       expect(h1['data']['groupid']).to eq $easemob_rspec_group_g_id
       expect(h1['data']['newmembers']).to match_array %w(u5 u6)
+    end
+  end
+
+  describe '#group_remove_users' do
+    it 'Can remove multi users from a group' do
+      res = Easemob.group_remove_users($easemob_rspec_group_g_id, usernames: %w(u1 u2))
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to eq 2
     end
   end
 end

@@ -47,5 +47,9 @@ module Easemob
     def group_add_users(group_id, usernames:)
       request :post, "chatgroups/#{group_id}/users", json: { usernames: usernames }
     end
+
+    def group_remove_users(group_id, usernames:)
+      request :delete, "chatgroups/#{group_id}/users/#{usernames.join(',')}"
+    end
   end
 end
