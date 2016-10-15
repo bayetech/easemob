@@ -17,6 +17,15 @@ RSpec.describe Easemob::Chatrooms do
     end
   end
 
+  describe '#query_chatrooms' do
+    it 'get all chatrooms' do
+      res = Easemob.query_chatrooms
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to be >= 1
+    end
+  end
+
   describe '#delete_chatroom' do
     it 'can delete chatroom' do
       res = Easemob.delete_group $easemob_rspec_to_delete_chatroom_id
