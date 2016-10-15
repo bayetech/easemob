@@ -6,10 +6,6 @@ module Easemob
       request :post, 'chatgroups', json: jd
     end
 
-    def get_group(group_id)
-      request :get, "chatgroups/#{group_id}"
-    end
-
     def get_groups(group_ids)
       request :get, "chatgroups/#{[*group_ids].join(',')}"
     end
