@@ -47,7 +47,7 @@ RSpec.describe Easemob::Users do
       h1 = JSON.parse res1.to_s
       expect(h1['entities'][2]['username']).to eq 'u2'
       cursor = h1['cursor']
-      res2 = Easemob.query_users(4, cursor)
+      res2 = Easemob.query_users(4, cursor: cursor)
       expect(res2.code).to eq 200
       h2 = JSON.parse res2.to_s
       expect(h2['entities'][3]['username']).to eq 'u6'
