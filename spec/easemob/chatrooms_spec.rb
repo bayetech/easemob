@@ -38,6 +38,15 @@ RSpec.describe Easemob::Chatrooms do
     end
   end
 
+  describe '#user_joined_chatrooms' do
+    it 'Get a user joined chatrooms list' do
+      res = Easemob.user_joined_chatrooms('u')
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to be >= 2
+    end
+  end
+
   describe '#delete_chatroom' do
     it 'can delete chatroom' do
       res = Easemob.delete_group $easemob_rspec_to_delete_chatroom_id
@@ -50,7 +59,7 @@ RSpec.describe Easemob::Chatrooms do
 
   describe '#modify_chatroom' do
     it 'can modify chatroom with new name and description' do
-      res = Easemob.modify_chatroom($easemob_rspec_chatroom_c_id, chatroom_name: 'g', description: 'chatroom after modified')
+      res = Easemob.modify_chatroom($easemob_rspec_chatroom_c_id, chatroom_name: 'c', description: 'chatroom after modified')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data']['name']).to be true

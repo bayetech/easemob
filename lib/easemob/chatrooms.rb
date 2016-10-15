@@ -14,6 +14,10 @@ module Easemob
       request :get, 'chatrooms'
     end
 
+    def user_joined_chatrooms(username)
+      request :get, "users/#{username}/joined_chatrooms"
+    end
+
     def delete_chatroom(chatroom_id)
       request :delete, "chatrooms/#{chatroom_id}"
     end
