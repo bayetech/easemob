@@ -43,5 +43,9 @@ module Easemob
     def user_leave_group(group_id, username:)
       request :delete, "chatgroups/#{group_id}/users/#{username}"
     end
+
+    def group_add_users(group_id, usernames:)
+      request :post, "chatgroups/#{group_id}/users", json: { usernames: usernames }
+    end
   end
 end

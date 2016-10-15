@@ -30,10 +30,10 @@ RSpec.describe Easemob::Groups do
 
   describe '#get_groups' do
     it 'get groups info by given Array of group_id' do
-      res = Easemob.get_groups([$easemob_rspec_group_g_id, $easemob_rspec_empty_group_id])
+      res = Easemob.get_groups [$easemob_rspec_group_g_id, $easemob_rspec_empty_group_id]
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
-      expect(h1['data'].collect { |d| d['id'] }).to match_array([$easemob_rspec_group_g_id, $easemob_rspec_empty_group_id])
+      expect(h1['data'].collect { |d| d['id'] }).to match_array [$easemob_rspec_group_g_id, $easemob_rspec_empty_group_id]
     end
   end
 
@@ -106,6 +106,17 @@ RSpec.describe Easemob::Groups do
       expect(h1['data']['result']).to be true
       expect(h1['data']['groupid']).to eq $easemob_rspec_group_g_id
       expect(h1['data']['user']).to eq 'u3'
+    end
+  end
+
+  describe '#group_add_users' do
+    it 'A group can add multi users' do
+      res = Easemob.group_add_users($easemob_rspec_group_g_id, usernames: %w(u5 u6))
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['action']).to eq 'add_member'
+      expect(h1['data']['groupid']).to eq $easemob_rspec_group_g_id
+      expect(h1['data']['newmembers']).to match_array %w(u5 u6)
     end
   end
 end
