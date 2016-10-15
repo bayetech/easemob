@@ -1,15 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe Easemob::Groups do
-  describe '#query_groups' do
-    it 'get all groups' do
-      res = Easemob.query_groups
-      expect(res.code).to eq 200
-      h1 = JSON.parse res.to_s
-      expect(h1['data'].count).to be >= 1
-    end
-  end
-
   describe '#create_group' do
     it 'can create group without any member' do
       res = Easemob.create_group('g1', 'group 1', 'u1')
@@ -23,6 +14,25 @@ RSpec.describe Easemob::Groups do
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['data']['groupid']).not_to be nil
+    end
+  end
+
+  describe '#query_groups' do
+    it 'get all groups' do
+      res = Easemob.query_groups
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data'].count).to be >= 1
+    end
+  end
+
+  describe '#delete_group' do
+    it 'can delete group' do
+      res = Easemob.delete_group($easemob_rspec_to_delete_group_id)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['success']).to be true
+      expect(h1['data']['groupid']).to eq $easemob_rspec_to_delete_group_id
     end
   end
 
@@ -43,16 +53,6 @@ RSpec.describe Easemob::Groups do
       expect(h1['data']['groupname']).to be nil
       expect(h1['data']['description']).to be nil
       expect(h1['data']['maxusers']).to be true
-    end
-  end
-
-  describe '#delete_group' do
-    it 'can delete group' do
-      res = Easemob.delete_group($easemob_rspec_to_delete_group_id)
-      expect(res.code).to eq 200
-      h1 = JSON.parse res.to_s
-      expect(h1['data']['success']).to be true
-      expect(h1['data']['groupid']).to eq $easemob_rspec_to_delete_group_id
     end
   end
 end
