@@ -39,5 +39,9 @@ module Easemob
     def user_join_group(username, group_id)
       request :post, "chatgroups/#{group_id}/users/#{username}"
     end
+
+    def user_leave_group(username, group_id)
+      request :delete, "chatgroups/#{group_id}/users/#{username}"
+    end
   end
 end

@@ -97,4 +97,16 @@ RSpec.describe Easemob::Groups do
       expect(h1['data']['user']).to eq 'u4'
     end
   end
+
+  describe '#user_leave_group' do
+    it 'A group can remove one user' do
+      res = Easemob.user_leave_group('u3', $easemob_rspec_group_g_id)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']['action']).to eq 'remove_member'
+      expect(h1['data']['result']).to be true
+      expect(h1['data']['groupid']).to eq $easemob_rspec_group_g_id
+      expect(h1['data']['user']).to eq 'u3'
+    end
+  end
 end
