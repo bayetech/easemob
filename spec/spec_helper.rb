@@ -52,6 +52,8 @@ RSpec.configure do |config|
     expect(res.code).to eq 200
     res = Easemob.deactivate_user 'deactivated_user'
     expect(res.code).to eq 200
+
+    # create group
     res = Easemob.create_group 'g', 'group', 'u', members: %w(u1 u2 u3 u4 u5)
     expect(res.code).to eq 200
     h1 = JSON.parse res.to_s
@@ -79,5 +81,13 @@ RSpec.configure do |config|
     $easemob_rspec_to_unblock_group_id = h5['data']['groupid']
     res = Easemob.add_to_group_block $easemob_rspec_to_unblock_group_id, to_block_usernames: %w(u3 u4 u5)
     expect(res.code).to eq 200
+
+    # create chatroom
+    res = Easemob.create_chatroom 'c', 'chatroom', 'u', members: %w(u1 u2 u3 u4 u5)
+    expect(res.code).to eq 200
+    h7 = JSON.parse res.to_s
+    expect(h7['data']['id']).not_to be nil
+    $easemob_rspec_chatroom_c_id = h7['data']['id']
+
   end
 end
