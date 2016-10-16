@@ -1,4 +1,4 @@
-Easemob [![Gem Version][version-badge]][rubygems] [![Build Status][travis-badge]][travis] [![Code Climate][codeclimate-badge]][codeclimate] [![Code Coverage][codecoverage-badge]][codecoverage]
+![Easemob Logo](https://raw.githubusercontent.com/bayetech/easemob/master/spec/easemob_logo.png) Easemob [![Gem Version][version-badge]][rubygems] [![Build Status][travis-badge]][travis] [![Code Climate][codeclimate-badge]][codeclimate] [![Code Coverage][codecoverage-badge]][codecoverage]
 =======
 
 Easemob is an unofficial easemob IM instant message gem, inspired from [huanxin](https://github.com/RobotJiang/ruby-for-huanxin) a lot.
