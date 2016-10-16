@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Eric Guo']
   spec.email         = ['eric.guocz@gmail.com']
 
-  spec.summary       = 'An unofficial easemob IM instant message gem.'
-  spec.description   = 'Helping rubyist integration with easemob IM service (环信 - 即时通讯云) easier.'
+  spec.summary       = 'An unofficial Easemob IM(instant message) service integration gem'
+  spec.description   = 'Helping rubyist integration with Easemob IM service (环信 - 即时通讯云) easier.'
   spec.homepage      = 'https://github.com/bayetech/easemob'
   spec.license       = 'MIT'
   spec.required_ruby_version = '~> 2.2'
