@@ -5,6 +5,8 @@ easemob [![Gem Version][version-badge]][rubygems] [![Build Status][travis-badge]
 
 An unofficial [Easemob IM instant message service](http://www.easemob.com/product/im) integration gem, inspired from [huanxin](https://github.com/RobotJiang/ruby-for-huanxin) a lot.
 
+`easemob` gem provide [ALL the RESTful API in server side integration](http://docs.easemob.com/im/100serverintegration/10intro).
+
 ## Installation
 
 Add this line to your application's Gemfile:
