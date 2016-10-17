@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe Easemob::Fileoperation do
-  describe '#upload_chatfiles' do
+  describe '#upload_chatfile' do
     it 'can upload a picture file' do
-      res = Easemob.upload_chatfiles('spec/easemob_logo.png')
+      res = Easemob.upload_chatfile('spec/easemob_logo.png')
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
       expect(h1['entities']).not_to be nil
