@@ -12,4 +12,5 @@
 *.sublime-workspace
 spec/examples.txt
 spec/easemob_logo_download.png
+spec/easemob_logo_thumbnail.png
 .byebug_history

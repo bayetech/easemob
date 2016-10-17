@@ -6,8 +6,8 @@ module Easemob
                                     restrict_access: restrict_access
     end
 
-    def download_chatfile(chatfile_uuid, share_secret: nil)
-      request :download, "chatfiles/#{chatfile_uuid}", share_secret: share_secret
+    def download_chatfile(chatfile_uuid, share_secret: nil, thumbnail: false)
+      request :download, "chatfiles/#{chatfile_uuid}", share_secret: share_secret, thumbnail: thumbnail
     end
   end
 end

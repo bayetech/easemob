@@ -22,5 +22,14 @@ RSpec.describe Easemob::Fileoperation do
       File.write(to_write_file_path, res.body)
       expect(FileUtils.compare_file('spec/easemob_logo.png', to_write_file_path)).to be_truthy
     end
+
+    it 'can download a picture file in thumbnail' do
+      res = Easemob.download_chatfile($easemob_rspec_easemob_logo_uuid, share_secret: $easemob_rspec_easemob_logo_share_secret,
+                                                                        thumbnail: true)
+      expect(res.code).to eq 200
+      to_write_file_path = 'spec/easemob_logo_thumbnail.png'
+      File.write(to_write_file_path, res.body)
+      expect(FileUtils.compare_file('spec/easemob_logo.png', to_write_file_path)).to be false
+    end
   end
 end

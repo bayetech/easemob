@@ -87,6 +87,8 @@ module Easemob
       header = { 'Accept' => 'application/octet-stream' }
       share_secret = options.delete(:share_secret)
       header['share-secret'] = share_secret unless share_secret.nil?
+      thumbnail = options.delete(:thumbnail)
+      header['thumbnail'] = thumbnail if thumbnail
       http.headers(header)
           .request(:get, "#{head_url}/#{resource}")
     else
