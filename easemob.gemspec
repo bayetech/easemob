@@ -17,10 +17,13 @@ Gem::Specification.new do |spec|
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
-  end - %w(CODE_OF_CONDUCT.md easemob.sublime-project Gemfile Rakefile easemob.gemspec bin/setup bin/console)
+  end - %w(CODE_OF_CONDUCT.md easemob.sublime-project Gemfile Rakefile easemob.gemspec bin/setup bin/console certs/Eric-Guo.pem)
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+
+  spec.cert_chain  = ['certs/Eric-Guo.pem']
+  spec.signing_key = File.expand_path('~/.ssh/gem-private_key.pem') if $PROGRAM_NAME.end_with?('gem')
 
   spec.add_runtime_dependency 'http', '>= 2.0.3', '< 3'
   spec.add_runtime_dependency 'connection_pool', '>= 2.2', '< 3'
