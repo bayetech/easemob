@@ -23,7 +23,7 @@ module Easemob
     def audio_to(target, target_type: :users, url:, filename:, length:,
                  secret: nil, from: nil, ext: nil)
       jd = { target_type: target_type, target: [*target],
-             msg: { type: :audio, filename: filename, url: url, length: length } }
+             msg: { type: :audio, url: url, filename: filename, length: length } }
       jd[:msg][:secret] = secret unless secret.nil?
       jd[:from] = from unless from.nil?
       jd[:ext] = ext unless ext.nil?
