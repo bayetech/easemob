@@ -7,6 +7,7 @@ require 'easemob/users'
 require 'easemob/groups'
 require 'easemob/chatrooms'
 require 'easemob/chatlog'
+require 'easemob/fileoperation'
 
 module Easemob
   class UserNameError < RuntimeError; end
@@ -70,13 +71,21 @@ module Easemob
     include Groups
     include Chatrooms
     include Chatlog
+    include Fileoperation
   end
 
   private_class_method
 
   def self.do_request(verb, http, resource, options)
-    http.headers('Authorization' => "Bearer #{token}")
-        .request(verb, "#{head_url}/#{resource}", options)
+    case verb
+    when :upload
+      restrict_access = options.delete(:restrict_access) || true
+      http.headers('Authorization' => "Bearer #{token}", 'restrict-access' => restrict_access)
+          .request(:post, "#{head_url}/#{resource}", options)
+    else
+      http.headers('Authorization' => "Bearer #{token}")
+          .request(verb, "#{head_url}/#{resource}", options)
+    end
   end
 
   def self.httprbs
