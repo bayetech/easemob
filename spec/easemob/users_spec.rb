@@ -158,7 +158,12 @@ RSpec.describe Easemob::Users do
   end
 
   describe '#get_user_offline_msg_status' do
-    xit 'check user offline msg status' do
+    it 'check user offline msg status' do
+      res = Easemob.get_user_offline_msg_status('u', $easemob_rspec_greeting_msg_id)
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']).to_not be_nil
+      expect(h1['data'][$easemob_rspec_greeting_msg_id]).to_not be_nil
     end
   end
 

@@ -102,5 +102,19 @@ RSpec.configure do |config|
     expect(h10['entities'][0]['type']).to eq 'chatfile'
     $easemob_rspec_easemob_logo_uuid = h10['entities'][0]['uuid']
     $easemob_rspec_easemob_logo_share_secret = h10['entities'][0]['share-secret']
+
+    # message_to u
+    res = Easemob.message_to 'u', text: 'Greeting!', from: 'u1'
+    expect(res.code).to eq 200
+    h11 = JSON.parse res.to_s
+    expect(h11['data']).not_to be nil
+    expect(h11['data']['u']).to eq 'success'
+
+    # get just created message id
+    res = Easemob.chatmessages(after: Time.now.to_i - 30)
+    expect(res.code).to eq 200
+    h12 = JSON.parse res.to_s
+    expect(h12['entities'].count).to be >= 1
+    $easemob_rspec_greeting_msg_id = h12['entities'][0]['msg_id']
   end
 end

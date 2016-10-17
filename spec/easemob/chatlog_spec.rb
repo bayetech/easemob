@@ -7,14 +7,14 @@ RSpec.describe Easemob::Chatlog do
       res = Easemob.chatmessages
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
-      expect(h1['count']).not_to be nil
+      expect(h1['entities'].count).to be >= 1
     end
 
     it 'get chat messages today only using after' do
       res = Easemob.chatmessages(after: Date.today.to_time)
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
-      expect(h1['count']).not_to be nil
+      expect(h1['entities'].count).to be >= 1
     end
   end
 end
