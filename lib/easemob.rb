@@ -8,6 +8,7 @@ require 'easemob/groups'
 require 'easemob/chatrooms'
 require 'easemob/chatlog'
 require 'easemob/fileoperation'
+require 'easemob/messages'
 
 module Easemob
   class UserNameError < RuntimeError; end
@@ -72,6 +73,7 @@ module Easemob
     include Chatrooms
     include Chatlog
     include Fileoperation
+    include Messages
   end
 
   private_class_method
