@@ -56,6 +56,41 @@ RSpec.describe Easemob::Messages do
     end
   end
 
+  describe '#video_to' do
+    it 'can sent video message to user' do
+      to_users = %w(testb testc testd)
+
+      request_payload = {
+        target_type: :users,
+        target: to_users,
+        msg: { type: :video, url: Easemob.chatfile_url('671dfe30-7f69-11e4-ba67-8fef0d502f46'),
+               filename: '1418105136313.mp4', length: 0, file_length: 58103,
+               thumb: Easemob.chatfile_url('671dfe30-7f69-11e4-ba67-8fef0d502f46'),
+               secret: 'VfEpSmSvEeS7yU8dwa9rAQc-DIL2HhmpujTNfSTsrDt6eNb_',
+               thumb_secret: 'ZyebKn9pEeSSfY03ROk7ND24zUf74s7HpPN1oMV-1JxN2O2I' },
+        from: 'testa'
+      }
+
+      return_result = { 'data' => { 'testb' => 'success', 'testc' => 'success', 'testd' => 'success' } }
+
+      expect(Easemob).to receive(:request)
+        .with(:post, 'messages', json: request_payload)
+        .and_return(return_result)
+
+      # Too hard to mock HTTP::Response, so using hash instead.
+      h1 = Easemob.video_to to_users, url: Easemob.chatfile_url('671dfe30-7f69-11e4-ba67-8fef0d502f46'),
+                                      filename: '1418105136313.mp4', length: 0, file_length: 58103,
+                                      thumb: Easemob.chatfile_url('671dfe30-7f69-11e4-ba67-8fef0d502f46'),
+                                      secret: 'VfEpSmSvEeS7yU8dwa9rAQc-DIL2HhmpujTNfSTsrDt6eNb_',
+                                      thumb_secret: 'ZyebKn9pEeSSfY03ROk7ND24zUf74s7HpPN1oMV-1JxN2O2I',
+                                      from: 'testa'
+      expect(h1['data']).not_to be nil
+      expect(h1['data']['testb']).to eq 'success'
+      expect(h1['data']['testc']).to eq 'success'
+      expect(h1['data']['testd']).to eq 'success'
+    end
+  end
+
   describe '#command_to' do
     it 'can sent command message to user' do
       res = Easemob.command_to 'g', target_type: :chatgroups, action: 'baye_joined'
