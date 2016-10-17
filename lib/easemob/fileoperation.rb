@@ -5,5 +5,9 @@ module Easemob
                                             hack: 'X' }, # Existing here for http-form_data 1.0.1 handle single param improperly, see https://github.com/httprb/form_data.rb/issues/4
                                     restrict_access: restrict_access
     end
+
+    def download_chatfile(chatfile_uuid, share_secret: nil)
+      request :download, "chatfiles/#{chatfile_uuid}", share_secret: share_secret
+    end
   end
 end

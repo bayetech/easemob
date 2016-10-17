@@ -82,6 +82,12 @@ module Easemob
       restrict_access = options.delete(:restrict_access) || true
       http.headers('Authorization' => "Bearer #{token}", 'restrict-access' => restrict_access)
           .request(:post, "#{head_url}/#{resource}", options)
+    when :download
+      header = { 'Authorization' => "Bearer #{token}", 'Accept' => 'application/octet-stream' }
+      share_secret = options.delete(:share_secret)
+      header['share-secret'] = share_secret unless share_secret.nil?
+      http.headers(header)
+          .request(:get, "#{head_url}/#{resource}")
     else
       http.headers('Authorization' => "Bearer #{token}")
           .request(verb, "#{head_url}/#{resource}", options)

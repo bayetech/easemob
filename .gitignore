@@ -11,4 +11,5 @@
 /tmp/
 *.sublime-workspace
 spec/examples.txt
+spec/easemob_logo_download.png
 .byebug_history

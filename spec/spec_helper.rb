@@ -94,5 +94,13 @@ RSpec.configure do |config|
     h9 = JSON.parse res.to_s
     expect(h9['data']['id']).not_to be nil
     $easemob_rspec_to_delete_chatroom_id = h9['data']['id']
+
+    # create chatfile
+    res = Easemob.upload_chatfile('spec/easemob_logo.png')
+    expect(res.code).to eq 200
+    h10 = JSON.parse res.to_s
+    expect(h10['entities'][0]['type']).to eq 'chatfile'
+    $easemob_rspec_easemob_logo_uuid = h10['entities'][0]['uuid']
+    $easemob_rspec_easemob_logo_share_secret = h10['entities'][0]['share-secret']
   end
 end
