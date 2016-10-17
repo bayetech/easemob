@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Easemob::Messages do
   describe '#message_to' do
-    it 'can sent message to user' do
+    it 'can sent text message to user' do
       res = Easemob.message_to 'u1', text: "hello, world\n"
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
@@ -12,7 +12,7 @@ RSpec.describe Easemob::Messages do
   end
 
   describe '#image_to' do
-    it 'can sent message to user' do
+    it 'can sent image message to user' do
       res = Easemob.image_to %w(u2 u3), url: Easemob.chatfile_url($easemob_rspec_easemob_logo_uuid),
                                         filename: 'easemob_logo.png',
                                         secret: $easemob_rspec_easemob_logo_share_secret,
@@ -26,7 +26,7 @@ RSpec.describe Easemob::Messages do
   end
 
   describe '#command_to' do
-    it 'can sent message to user' do
+    it 'can sent command message to user' do
       res = Easemob.command_to 'g', target_type: :chatgroups, action: 'baye_joined'
       expect(res.code).to eq 200
       h1 = JSON.parse res.to_s
