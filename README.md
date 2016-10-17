@@ -1,4 +1,6 @@
-![Easemob Logo](https://raw.githubusercontent.com/bayetech/easemob/master/spec/easemob_logo.png) easemob [![Gem Version][version-badge]][rubygems] [![Build Status][travis-badge]][travis] [![Code Climate][codeclimate-badge]][codeclimate] [![Code Coverage][codecoverage-badge]][codecoverage]
+![Easemob Logo](https://raw.githubusercontent.com/bayetech/easemob/master/spec/easemob_logo.png)
+
+easemob [![Gem Version][version-badge]][rubygems] [![Build Status][travis-badge]][travis] [![Code Climate][codeclimate-badge]][codeclimate] [![Code Coverage][codecoverage-badge]][codecoverage]
 =======
 
 An unofficial [Easemob IM instant message service](http://www.easemob.com/product/im) integration gem, inspired from [huanxin](https://github.com/RobotJiang/ruby-for-huanxin) a lot.
