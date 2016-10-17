@@ -10,4 +10,14 @@ RSpec.describe Easemob::Messages do
       expect(h1['data']['u1']).to eq 'success'
     end
   end
+
+  describe '#command_to' do
+    it 'can sent message to user' do
+      res = Easemob.command_to 'g', target_type: :chatgroups, action: 'baye_joined'
+      expect(res.code).to eq 200
+      h1 = JSON.parse res.to_s
+      expect(h1['data']).not_to be nil
+      expect(h1['data']['g']).to eq 'success'
+    end
+  end
 end
