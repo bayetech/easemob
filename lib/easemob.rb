@@ -67,6 +67,10 @@ module Easemob
     access_token
   end
 
+  def self.chatfile_url(chatfile_uuid)
+    "#{@base_url}/#{@org_name}/#{@app_name}/chatfiles/#{chatfile_uuid}"
+  end
+
   class << self
     include Users
     include Groups
