@@ -42,7 +42,7 @@ module Easemob
       request :post, 'messages', json: jd
     end
 
-    def command_to(target, target_type: :users, action:,
+    def command_to(target, target_type: :users, action: :action,
                    from: nil, ext: nil)
       jd = { target_type: target_type, target: [*target],
              msg: { type: :cmd, action: action } }
