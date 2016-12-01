@@ -56,27 +56,27 @@ RSpec.configure do |config|
     # create group
     res = Easemob.create_group 'g', 'group', 'u', members: %w(u1 u2 u3 u4 u5)
     expect(res.code).to eq 200
-    h1 = JSON.parse res.to_s
+    h1 = JSON.parse res.body.to_s
     expect(h1['data']['groupid']).not_to be nil
     $easemob_rspec_group_g_id = h1['data']['groupid']
     res = Easemob.create_group 'empty_group', 'empty group', 'u'
     expect(res.code).to eq 200
-    h2 = JSON.parse res.to_s
+    h2 = JSON.parse res.body.to_s
     expect(h2['data']['groupid']).not_to be nil
     $easemob_rspec_empty_group_id = h2['data']['groupid']
     res = Easemob.create_group 'to_delete_group', 'to delete group', 'u'
     expect(res.code).to eq 200
-    h3 = JSON.parse res.to_s
+    h3 = JSON.parse res.body.to_s
     expect(h3['data']['groupid']).not_to be nil
     $easemob_rspec_to_delete_group_id = h3['data']['groupid']
     res = Easemob.create_group 'newowner_group', 'new owner group', 'u', members: %w(u1)
     expect(res.code).to eq 200
-    h4 = JSON.parse res.to_s
+    h4 = JSON.parse res.body.to_s
     expect(h4['data']['groupid']).not_to be nil
     $easemob_rspec_newowner_group_id = h4['data']['groupid']
     res = Easemob.create_group 'to_unblock_group', 'need to unblock group', 'u', members: %w(u1 u2 u3 u4 u5)
     expect(res.code).to eq 200
-    h5 = JSON.parse res.to_s
+    h5 = JSON.parse res.body.to_s
     expect(h5['data']['groupid']).not_to be nil
     $easemob_rspec_to_unblock_group_id = h5['data']['groupid']
     res = Easemob.add_to_group_block $easemob_rspec_to_unblock_group_id, to_block_usernames: %w(u3 u4 u5)
@@ -85,20 +85,20 @@ RSpec.configure do |config|
     # create chatroom
     res = Easemob.create_chatroom 'c', 'chatroom', 'u', members: %w(u1 u2 u3 u4 u5)
     expect(res.code).to eq 200
-    h7 = JSON.parse res.to_s
+    h7 = JSON.parse res.body.to_s
     expect(h7['data']['id']).not_to be nil
     $easemob_rspec_chatroom_c_id = h7['data']['id']
 
     res = Easemob.create_chatroom 'to_delete_chatroom', 'to delete chatroom', 'u'
     expect(res.code).to eq 200
-    h9 = JSON.parse res.to_s
+    h9 = JSON.parse res.body.to_s
     expect(h9['data']['id']).not_to be nil
     $easemob_rspec_to_delete_chatroom_id = h9['data']['id']
 
     # create chatfile
     res = Easemob.upload_chatfile('spec/easemob_logo.png')
     expect(res.code).to eq 200
-    h10 = JSON.parse res.to_s
+    h10 = JSON.parse res.body.to_s
     expect(h10['entities'][0]['type']).to eq 'chatfile'
     $easemob_rspec_easemob_logo_uuid = h10['entities'][0]['uuid']
     $easemob_rspec_easemob_logo_share_secret = h10['entities'][0]['share-secret']
@@ -106,14 +106,14 @@ RSpec.configure do |config|
     # message_to u
     res = Easemob.message_to 'u', text: 'Greeting!', from: 'u1'
     expect(res.code).to eq 200
-    h11 = JSON.parse res.to_s
+    h11 = JSON.parse res.body.to_s
     expect(h11['data']).not_to be nil
     expect(h11['data']['u']).to eq 'success'
 
     # get just created message id
     res = Easemob.chatmessages(after: Time.now.to_i - 30)
     expect(res.code).to eq 200
-    h12 = JSON.parse res.to_s
+    h12 = JSON.parse res.body.to_s
     expect(h12['entities'].count).to be >= 1
     $easemob_rspec_greeting_msg_id = h12['entities'][0]['msg_id']
   end

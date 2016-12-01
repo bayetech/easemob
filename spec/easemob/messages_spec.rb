@@ -5,7 +5,7 @@ RSpec.describe Easemob::Messages do
     it 'can sent text message to user' do
       res = Easemob.message_to 'u1', text: "hello, world\n"
       expect(res.code).to eq 200
-      h1 = JSON.parse res.to_s
+      h1 = JSON.parse res.body.to_s
       expect(h1['data']).not_to be nil
       expect(h1['data']['u1']).to eq 'success'
     end
@@ -18,7 +18,7 @@ RSpec.describe Easemob::Messages do
                                         secret: $easemob_rspec_easemob_logo_share_secret,
                                         from: 'u1', image_size: { width: 210, height: 71 }
       expect(res.code).to eq 200
-      h1 = JSON.parse res.to_s
+      h1 = JSON.parse res.body.to_s
       expect(h1['data']).not_to be nil
       expect(h1['data']['u2']).to eq 'success'
       expect(h1['data']['u3']).to eq 'success'
@@ -95,7 +95,7 @@ RSpec.describe Easemob::Messages do
     it 'can sent command message to user' do
       res = Easemob.command_to 'g', target_type: :chatgroups, action: 'baye_joined'
       expect(res.code).to eq 200
-      h1 = JSON.parse res.to_s
+      h1 = JSON.parse res.body.to_s
       expect(h1['data']).not_to be nil
       expect(h1['data']['g']).to eq 'success'
     end

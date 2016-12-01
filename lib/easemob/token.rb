@@ -5,7 +5,7 @@ module Easemob
         http.post "#{Easemob.head_url}/token", json: { grant_type: 'client_credentials', client_id: Easemob.client_id, client_secret: Easemob.client_secret }
       end
       raise "Failed to refresh easemob token: #{res}" unless res.code == 200
-      write_to_store(JSON.parse(res.to_s))
+      write_to_store(JSON.parse(res.body.to_s))
       read_from_store
     end
 

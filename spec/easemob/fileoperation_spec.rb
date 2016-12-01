@@ -6,7 +6,7 @@ RSpec.describe Easemob::Fileoperation do
     it 'can upload a picture file' do
       res = Easemob.upload_chatfile('spec/easemob_logo.png')
       expect(res.code).to eq 200
-      h1 = JSON.parse res.to_s
+      h1 = JSON.parse res.body.to_s
       expect(h1['entities']).not_to be nil
       expect(h1['entities'][0]['uuid']).not_to be nil
       expect(h1['entities'][0]['type']).to eq 'chatfile'
