@@ -9,7 +9,6 @@ require 'easemob/chatrooms'
 require 'easemob/chatlog'
 require 'easemob/fileoperation'
 require 'easemob/messages'
-require 'easemob/response_message'
 
 module Easemob
   class UserNameError < RuntimeError; end
@@ -88,20 +87,19 @@ module Easemob
     case verb
     when :upload
       restrict_access = options.delete(:restrict_access) || true
-      http_response = http.headers('restrict-access' => restrict_access)
-                          .request(:post, "#{head_url}/#{resource}", options)
+      http.headers('restrict-access' => restrict_access)
+          .request(:post, "#{head_url}/#{resource}", options)
     when :download
       header = { 'Accept' => 'application/octet-stream' }
       share_secret = options.delete(:share_secret)
       header['share-secret'] = share_secret unless share_secret.nil?
       thumbnail = options.delete(:thumbnail)
       header['thumbnail'] = thumbnail if thumbnail
-      http_response = http.headers(header)
-                          .request(:get, "#{head_url}/#{resource}")
+      http.headers(header)
+          .request(:get, "#{head_url}/#{resource}")
     else
-      http_response = http.request(verb, "#{head_url}/#{resource}", options)
+      http.request(verb, "#{head_url}/#{resource}", options)
     end
-    ResponseMessage.new(http_response)
   end
 
   def self.httprbs
