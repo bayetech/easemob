@@ -4,5 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'byebug'
-gem 'simplecov', require: false, group: :test
-gem 'codeclimate-test-reporter', group: :test, require: nil
+group :test do
+  gem 'simplecov'
+  gem 'codeclimate-test-reporter', '~> 1.0.0'
+end
