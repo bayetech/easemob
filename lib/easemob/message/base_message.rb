@@ -36,5 +36,16 @@ module Easemob
       @cursor = @body_hash['cursor']
       @count = @body_hash['count']
     end
+
+    def to_s
+      @body.to_s
+    end
+
+    def inspect
+      "#{self.class.name}(code: #{@code}, body: #{@body}, action: #{@action},
+       application: #{@application}, params: #{@params}, uri: #{@uri}, entities: #{@entities},
+       data: #{@data}, timestamp: #{@timestamp}, duration: #{@duration}, organization: #{@organization},
+       applicationName: #{@applicationName}, cursor: #{@cursor}, count: #{@count})"
+    end
   end
 end
