@@ -38,7 +38,7 @@ RSpec.describe Easemob::Messages do
         from: 'testa'
       }
 
-      return_result = { 'data' => { 'testb' => 'success', 'testc' => 'success', 'testd' => 'success' } }
+      return_result = OpenStruct.new(headers: {'Content-Type' => 'application/json'} , code: 200, body: { 'data' => { 'testb' => 'success', 'testc' => 'success', 'testd' => 'success' } }.to_json)
 
       expect(Easemob).to receive(:request)
         .with(:post, 'messages', json: request_payload)
@@ -49,10 +49,10 @@ RSpec.describe Easemob::Messages do
                                       filename: 'messages.amr', length: 10,
                                       secret: 'Hfx_WlXGEeSdDW-SuX2EaZcXDC7ZEig3OgKZye9IzKOwoCjM',
                                       from: 'testa'
-      expect(h1['data']).not_to be nil
-      expect(h1['data']['testb']).to eq 'success'
-      expect(h1['data']['testc']).to eq 'success'
-      expect(h1['data']['testd']).to eq 'success'
+      expect(h1.data).not_to be nil
+      expect(h1.data['testb']).to eq 'success'
+      expect(h1.data['testc']).to eq 'success'
+      expect(h1.data['testd']).to eq 'success'
     end
   end
 
@@ -71,7 +71,7 @@ RSpec.describe Easemob::Messages do
         from: 'testa'
       }
 
-      return_result = { 'data' => { 'testb' => 'success', 'testc' => 'success', 'testd' => 'success' } }
+      return_result = OpenStruct.new(headers: {'Content-Type' => 'application/json'} , code: 200, body: { 'data' => { 'testb' => 'success', 'testc' => 'success', 'testd' => 'success' } }.to_json)
 
       expect(Easemob).to receive(:request)
         .with(:post, 'messages', json: request_payload)
@@ -84,10 +84,10 @@ RSpec.describe Easemob::Messages do
                                       secret: 'VfEpSmSvEeS7yU8dwa9rAQc-DIL2HhmpujTNfSTsrDt6eNb_',
                                       thumb_secret: 'ZyebKn9pEeSSfY03ROk7ND24zUf74s7HpPN1oMV-1JxN2O2I',
                                       from: 'testa'
-      expect(h1['data']).not_to be nil
-      expect(h1['data']['testb']).to eq 'success'
-      expect(h1['data']['testc']).to eq 'success'
-      expect(h1['data']['testd']).to eq 'success'
+      expect(h1.data).not_to be nil
+      expect(h1.data['testb']).to eq 'success'
+      expect(h1.data['testc']).to eq 'success'
+      expect(h1.data['testd']).to eq 'success'
     end
   end
 
@@ -95,9 +95,8 @@ RSpec.describe Easemob::Messages do
     it 'can sent command message to user' do
       res = Easemob.command_to 'g', target_type: :chatgroups, action: 'baye_joined'
       expect(res.code).to eq 200
-      h1 = JSON.parse res.body.to_s
-      expect(h1['data']).not_to be nil
-      expect(h1['data']['g']).to eq 'success'
+      expect(res.data).not_to be nil
+      expect(res.data['g']).to eq 'success'
     end
   end
 end
