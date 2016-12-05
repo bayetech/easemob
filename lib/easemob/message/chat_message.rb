@@ -5,7 +5,7 @@ module Easemob
 
     def all_success?
       flag = true
-      @data.values.each{ |ar| flag = false if ar != 'success' }
+      @data.values.each{ |ar| flag = false and return if ar != 'success' }
 
       flag
     end
