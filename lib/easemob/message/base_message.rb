@@ -10,7 +10,7 @@ module Easemob
     attr_reader :timestamp
     attr_reader :duration
     attr_reader :organization
-    attr_reader :applicationName
+    attr_reader :application_name
     attr_reader :cursor
     attr_reader :count
 
@@ -32,7 +32,7 @@ module Easemob
       @timestamp = @body_hash['timestamp']
       @duration = @body_hash['duration']
       @organization = @body_hash['organization']
-      @applicationName = @body_hash['applicationName']
+      @application_name = @body_hash['applicationName']
       @cursor = @body_hash['cursor']
       @count = @body_hash['count']
     end
