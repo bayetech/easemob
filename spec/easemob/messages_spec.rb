@@ -99,6 +99,7 @@ RSpec.describe Easemob::Messages do
       expect(res.to_s).to eq res.body.to_s
       expect(res.inspect).not_to be nil
       expect(res.data['g']).to eq 'success'
+      expect(res.all_success?).to eq true
     end
   end
 end
