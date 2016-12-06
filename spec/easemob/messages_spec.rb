@@ -96,7 +96,7 @@ RSpec.describe Easemob::Messages do
       res = Easemob.command_to 'g', target_type: :chatgroups, action: 'baye_joined'
       expect(res.code).to eq 200
       expect(res.data).not_to be nil
-      expect(res.to_s).to eq res.body
+      expect(res.to_s).to eq res.body.to_s
       expect(res.inspect).not_to be nil
       expect(res.data['g']).to eq 'success'
     end

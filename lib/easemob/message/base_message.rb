@@ -17,7 +17,7 @@ module Easemob
     def initialize(http_response)
       @raw_http_response = http_response
       @code = http_response.code
-      @body = http_response.body.to_s
+      @body = http_response.body
 
       return if http_response.code != 200 \
                 || http_response.headers['Content-Type'].index('application/octet-stream')
