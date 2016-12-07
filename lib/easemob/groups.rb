@@ -33,11 +33,13 @@ module Easemob
       GroupMessage.new request :delete, "chatgroups/#{group_id}"
     end
 
-    def modify_group(group_id, groupname: nil, description: nil, maxusers: nil)
+    def modify_group(group_id, groupname: nil, description: nil, maxusers: nil, membersonly: nil)
       jd = {}
       jd[:groupname] = groupname unless groupname.nil?
       jd[:description] = description unless description.nil?
       jd[:maxusers] = maxusers unless maxusers.nil?
+      jd[:membersonly] = membersonly unless membersonly.nil?
+
       GroupMessage.new request :put, "chatgroups/#{group_id}", json: jd
     end
 
