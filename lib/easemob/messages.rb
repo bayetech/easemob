@@ -4,7 +4,7 @@ module Easemob
     def message_to(target, target_type: :users, text:,
                    from: nil, ext: nil)
       jd = { target_type: target_type, target: [*target],
-             msg: { type: :txt, txt: text } }
+             msg: { type: :txt, msg: text } }
       jd[:from] = from unless from.nil?
       jd[:ext] = ext unless ext.nil?
       ChatMessage.new request :post, 'messages', json: jd
