@@ -32,7 +32,7 @@ RSpec.configure do |config|
     expect(res.code).to eq 200
     res = Easemob.create_user('u', 'pwd')
     expect(res.code).to eq 200
-    users = (1..9).inject([]) { |a, e| a << { username: "u#{e}", password: 'pwd' } }
+    users = (1..10).inject([]) { |a, e| a << { username: "u#{e}", password: 'pwd' } }
     res = Easemob.create_users(users)
     expect(res.code).to eq 200
     res = Easemob.create_users([{ username: 'to_delete_user', password: 'pwd' },
@@ -40,6 +40,7 @@ RSpec.configure do |config|
                                 { username: 'deactivated_user', password: 'pwd' }])
     expect(res.code).to eq 200
     sleep 2 # must sleep to make sure easemob finish insert.
+
     res = Easemob.add_user_friend('u', friend_username: 'u1')
     expect(res.code).to eq 200
     res = Easemob.add_user_friend('u', friend_username: 'u2')
@@ -52,7 +53,7 @@ RSpec.configure do |config|
     expect(res.code).to eq 200
 
     # create group
-    res = Easemob.create_group 'g', 'group', 'u', members: %w(u1 u2 u3 u4 u5)
+    res = Easemob.create_group 'g', 'group', 'u', members: %w(u1 u2 u3 u4 u5 u10)
     expect(res.code).to eq 200
     h1 = JSON.parse res.body.to_s
     expect(h1['data']['groupid']).not_to be nil
