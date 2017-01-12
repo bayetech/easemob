@@ -62,7 +62,7 @@ RSpec.describe Easemob::Chatrooms do
       res = Easemob.modify_chatroom($easemob_rspec_chatroom_c_id, chatroom_name: 'c', description: 'chatroom after modified')
       expect(res.code).to eq 200
       h1 = JSON.parse res.body.to_s
-      expect(h1['data']['name']).to be true
+      expect(h1['data']['groupname']).to be true
       expect(h1['data']['description']).to be true
       expect(h1['data']['maxusers']).to be nil
     end
