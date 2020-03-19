@@ -27,6 +27,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'http', '>= 2.0.3', '< 5'
   spec.add_runtime_dependency 'connection_pool', '>= 2.2', '< 3'
-  spec.add_development_dependency 'rake', '~> 11.3'
-  spec.add_development_dependency 'rspec', '~> 3.5'
+  spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'rspec', '~> 3.9'
 end
