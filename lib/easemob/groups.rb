@@ -2,7 +2,7 @@ module Easemob
   autoload(:GroupMessage, File.expand_path('message/group_message', __dir__))
   module Groups
     def create_group(groupname, description, owner, members: nil, is_public: true, maxusers: 200, is_approval: false)
-      jd = { groupname: groupname, desc: description, public: is_public, owner: owner, users: maxusers, approval: is_approval }
+      jd = { groupname: groupname, desc: description, public: is_public, owner: owner, maxusers: maxusers, approval: is_approval }
       jd[:members] = members unless members.nil?
       GroupMessage.new request :post, 'chatgroups', json: jd
     end
